@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Apps 2026 | Specialty Workspace & Lounge</title>
+  
+  <!-- Google Fonts: Syne & Plus Jakarta Sans for trendy cafe editorial feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            serif: ['Fraunces', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            oat: {
+              50: '#fdfbf7',
+              100: '#f9f5ed',
+              200: '#f2eade',
+              300: '#e5d7c3',
+            },
+            terracotta: {
+              400: '#e07a5f',
+              500: '#d96443',
+              600: '#c24e2d',
+            },
+            espresso: {
+              800: '#2b211d',
+              900: '#1e1613',
+              950: '#140e0c',
+            },
+            matcha: {
+              600: '#58745a',
+              700: '#435b45',
+            },
+            latte: '#d4bba2',
+          },
+          boxShadow: {
+            'artisan': '0 20px 40px -15px rgba(43, 33, 29, 0.08), 0 0 1px 1px rgba(217, 100, 67, 0.05)',
+            'artisan-hover': '0 28px 50px -15px rgba(217, 100, 67, 0.18), 0 1px 2px rgba(43, 33, 29, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f7f3ec;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(224, 122, 95, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 10%, rgba(88, 116, 90, 0.10) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(212, 187, 162, 0.25) 0px, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    /* Subtle artisan grain effect */
+    .grain-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+
+    .steam-pill {
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 14px rgba(43, 33, 29, 0.04);
+    }
+
+    .card-transition {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen text-espresso-900 font-sans antialiased selection:bg-terracotta-400 selection:text-white relative">
+  <div class="fixed inset-0 grain-overlay pointer-events-none z-50"></div>
+  
+  <!-- Ambient glow spots -->
+  <div class="fixed -top-40 -left-40 w-96 h-96 bg-terracotta-400/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="fixed top-1/2 -right-40 w-96 h-96 bg-matcha-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <header class="w-full max-w-7xl mx-auto pt-8 sm:pt-12 px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-oat-300/80">
+      
+      <!-- Brand & Year Indicator -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-espresso-900 text-oat-50 flex items-center justify-center shadow-lg shadow-espresso-950/20 transform -rotate-3 hover:rotate-0 transition-transform">
+          <!-- Steaming Coffee Cup Icon -->
+          <svg class="w-6 h-6 text-terracotta-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+            <line x1="6" y1="2" x2="6" y2="4"/>
+            <line x1="10" y1="2" x2="10" y2="4"/>
+            <line x1="14" y1="2" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-matcha-600 bg-matcha-600/10 px-2.5 py-0.5 rounded-full">Specialty Hub</span>
+            <span class="text-xs font-medium text-espresso-800/60 font-mono">EST. 2026</span>
+          </div>
+          <h1 class="text-xl font-display font-bold text-espresso-900 tracking-tight">Atelier Reserve</h1>
+        </div>
+      </div>
+
+      <!-- Live Vibe / Status Indicator -->
+      <div class="flex items-center gap-3 steam-pill bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-oat-300/60">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600"></span>
+        </span>
+        <span class="text-xs font-medium text-espresso-800/80">Roasting Session Active</span>
+        <span class="text-espresso-800/25">|</span>
+        <span id="live-time" class="text-xs font-mono text-espresso-800/70">10:30 AM</span>
+      </div>
+    </div>
+
+    <div class="pt-10 sm:pt-14 pb-8 max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-terracotta-500/10 border border-terracotta-500/20 text-terracotta-600 text-xs font-semibold uppercase tracking-widest mb-4">
+        <span>☕ Curator's Selection</span>
+      </div>
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-espresso-950 leading-[1.12]">
+        Productivity Apps <span class="font-serif italic text-terracotta-500 font-normal">2026</span>
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-espresso-800/75 font-sans leading-relaxed max-w-2xl font-normal">
+        A curated ten-suite digital atelier crafted for creators, strategists, and deep thinkers. Pull up a chair, sip your brew, and launch your workflow across creative studios, soundscapes, intelligence, and playful pauses.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 py-4 mb-2">
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none" id="filter-buttons">
+        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-espresso-900 text-oat-50 shadow-sm shadow-espresso-900/10">All Suites (10)</button>
+        <button data-filter="creation" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/70 hover:bg-white text-espresso-800/80 border border-oat-300/60">Creative & Write</button>
+        <button data-filter="audio" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/70 hover:bg-white text-espresso-800/80 border border-oat-300/60">Acoustic & Sound</button>
+        <button data-filter="connect" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/70 hover:bg-white text-espresso-800/80 border border-oat-300/60">AI & Lounge</button>
+      </div>
+
+      <!-- Quick Search Input -->
+      <div class="relative w-full sm:w-64">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-espresso-800/40">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+        <input 
+          type="text" 
+          id="app-search" 
+          placeholder="Filter applications..." 
+          class="w-full pl-9 pr-4 py-2 rounded-xl text-xs sm:text-sm bg-white/80 border border-oat-300/70 focus:outline-none focus:ring-2 focus:ring-terracotta-400 focus:bg-white placeholder-espresso-800/40 transition-all"
+        />
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20">
+    <!-- Grid configured for 4 columns on large screens (first two rows form the 2x4 layout requested) -->
+    <div id="apps-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- APP 1: Design Flow -->
+      <article data-category="creation" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-amber-500/10 text-amber-700 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19 7-7 3 3-7 7-3-3z"/>
+                <path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                <path d="m2 2 7.586 7.586"/>
+                <circle cx="11" cy="11" r="2"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 01</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Design Flow</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Intuitive visual canvas and systemic diagramming built for modern creative pipelines.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">flow-woad-three</span>
+          <a href="https://flow-woad-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 2: Marketing -->
+      <article data-category="creation" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-terracotta-500/10 text-terracotta-600 group-hover:bg-terracotta-500 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 11 18-5v12L3 14v-3z"/>
+                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 02</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Marketing</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Client campaign intelligence, strategic narratives, and pitch deck deployment.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">client-project-5</span>
+          <a href="https://client-project-five-weld.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 3: Authors Note -->
+      <article data-category="creation" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-amber-700/10 text-amber-900 group-hover:bg-amber-800 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 03</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Authors Note</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Distraction-free editorial workspace tailored for manuscripts, essays, and notes.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">authoring-nu</span>
+          <a href="https://authoring-nu.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 4: Sound Studio -->
+      <article data-category="audio" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-indigo-500/10 text-indigo-700 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"/>
+                <line x1="4" y1="10" x2="4" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12" y2="3"/>
+                <line x1="20" y1="21" x2="20" y2="16"/>
+                <line x1="20" y1="12" x2="20" y2="3"/>
+                <line x1="1" y1="14" x2="7" y2="14"/>
+                <line x1="9" y1="8" x2="15" y2="8"/>
+                <line x1="17" y1="16" x2="23" y2="16"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 04</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Sound Studio</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Modular sound effects, atmospheric pads, and acoustic mastering console.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">sfx-navy-three</span>
+          <a href="https://sfx-navy-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 5: Speech Gen -->
+      <article data-category="audio" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-teal-500/10 text-teal-700 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 05</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Speech Gen</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Neural text-to-speech studio with realistic vocal inflections and pace tuning.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">tts-studio</span>
+          <a href="https://sfx-navy-three.vercel.app/tts-studio.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 6: Audio Player -->
+      <article data-category="audio" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-orange-500/10 text-orange-700 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 9v.01"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 06</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Audio Player</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Warm analog acoustic playback unit designed for continuous concentration tracks.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">player.html</span>
+          <a href="https://sfx-navy-three.vercel.app/player.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 7: Blog -->
+      <article data-category="creation" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-matcha-600/10 text-matcha-700 group-hover:bg-matcha-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                <path d="M6 6h10"/>
+                <path d="M6 10h10"/>
+                <path d="M6 14h6"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 07</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Blog</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            General expression repository featuring long-form dispatches and essays.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">general-expression</span>
+          <a href="https://general-expression.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 8: Ask AI -->
+      <article data-category="connect" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-rose-500/10 text-rose-700 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 08</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Ask AI</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Neural cognition assistant for instant queries, synthesizing research, and brainstorming.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">ai-model-ten</span>
+          <a href="https://ai-model-ten-gamma.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 9: Chat Room -->
+      <article data-category="connect" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm lg:col-start-2">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-cyan-600/10 text-cyan-800 group-hover:bg-cyan-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <line x1="8" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="12" y2="14"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 09</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Chat Room</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Synchronous group chatter and communal coffee breaks for modern remote teams.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">group-chat</span>
+          <a href="https://group-chat-3nkg.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 10: Multiplayer Checkers -->
+      <article data-category="connect" class="app-card group relative flex flex-col justify-between p-6 rounded-3xl bg-white/80 hover:bg-white border border-oat-200/90 shadow-artisan hover:shadow-artisan-hover hover:-translate-y-1.5 card-transition backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-13 h-13 p-3.5 rounded-2xl bg-amber-600/10 text-amber-800 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M3 9h18"/>
+                <path d="M3 15h18"/>
+                <path d="M9 3v18"/>
+                <path d="M15 3v18"/>
+                <circle cx="6" cy="6" r="1.5" fill="currentColor"/>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-oat-100 text-espresso-800/70 border border-oat-300/40">Studio 10</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-espresso-950 group-hover:text-terracotta-500 transition-colors">Multiplayer Checkers</h3>
+          <p class="mt-2 text-sm text-espresso-800/70 leading-relaxed font-normal">
+            Turn-based strategy and casual tactile boardplay across live internet peer matches.
+          </p>
+        </div>
+        <div class="pt-6 mt-4 border-t border-oat-200/60 flex items-center justify-between">
+          <span class="text-xs font-medium text-espresso-800/50">multiplayer-tawny</span>
+          <a href="https://multiplayer-tawny.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-terracotta-500 text-oat-50 text-xs font-semibold transition-all transform active:scale-95">
+            <span>Launch</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Empty State for Search -->
+    <div id="no-results" class="hidden text-center py-16">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-oat-200 flex items-center justify-center text-espresso-800/50">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h4 class="text-lg font-display font-bold text-espresso-900">No suites match your search</h4>
+      <p class="text-sm text-espresso-800/60 mt-1">Try another term or clear the filter.</p>
+    </div>
+  </main>
+
+  <footer class="w-full border-t border-oat-300/80 bg-oat-100/60 backdrop-blur-md py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></div>
+        <p class="text-xs text-espresso-800/70 font-medium">
+          Freshly brewed for high-output thinkers &bull; Productivity Apps 2026 Collection
+        </p>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-espresso-800/60">
+        <span class="hover:text-espresso-900 transition-colors cursor-default">Single Origin Tech</span>
+        <span>&bull;</span>
+        <span class="hover:text-espresso-900 transition-colors cursor-default">Target: _blank ready</span>
+        <span>&bull;</span>
+        <button id="copy-all-btn" class="font-semibold text-terracotta-500 hover:text-terracotta-600 transition-colors">
+          Copy All App URLs
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Box -->
+  <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-espresso-950 text-oat-50 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs font-medium z-50">
+    <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toast-text">URLs copied to clipboard</span>
+  </div>
+
+  <script>
+    /* Live Clock update with Cafe aesthetic */
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const clockEl = document.getElementById('live-time');
+      if (clockEl) {
+        clockEl.textContent = timeStr;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    /* Interactive Search & Filter Logic */
+    const searchInput = document.getElementById('app-search');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.app-card');
+    const noResults = document.getElementById('no-results');
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function filterCards() {
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+
+        const matchesCat = (currentCategory === 'all') || (category === currentCategory);
+        const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery);
+
+        if (matchesCat && matchesSearch) {
+          card.classList.remove('hidden');
+          card.classList.add('flex');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('flex');
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    /* Filter tab clicks */
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'bg-espresso-900', 'text-oat-50', 'shadow-sm');
+          b.classList.add('bg-white/70', 'text-espresso-800/80', 'border', 'border-oat-300/60');
+        });
+
+        btn.classList.add('active', 'bg-espresso-900', 'text-oat-50', 'shadow-sm');
+        btn.classList.remove('bg-white/70', 'text-espresso-800/80', 'border');
+
+        currentCategory = btn.getAttribute('data-filter');
+        filterCards();
+      });
+    });
+
+    /* Live Search Handler */
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      filterCards();
+    });
+
+    /* Toast Notification trigger */
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    /* Copy all app URLs using document.execCommand for safe execution */
+    const copyBtn = document.getElementById('copy-all-btn');
+    copyBtn.addEventListener('click', () => {
+      const links = Array.from(document.querySelectorAll('.app-card a')).map(a => a.href);
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = links.join('\n');
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('All 10 app links copied to clipboard!');
+      } catch (err) {
+        showToast('Could not copy links automatically');
+      }
+      document.body.removeChild(tempTextArea);
+    });
+  </script>
+</body>
+</html>
