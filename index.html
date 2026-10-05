@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Productivity Apps 2026 | Specialty Workspace & Digital Lounge</title>
 
-  <!-- Google Fonts: Fraunces & Plus Jakarta Sans & Outfit for that warm editorial artisan cafe feel -->
+  <!-- Google Fonts: Fraunces (Editorial Cafe Serif) & Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,600&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,42 +18,44 @@
       theme: {
         extend: {
           fontFamily: {
-            serif: ['Fraunces', 'serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace'],
           },
           colors: {
             latte: {
               50: '#fdfbf9',
-              100: '#fcf9f5',
-              200: '#f7f1e7',
-              300: '#eddcc8',
-              400: '#dcbe9f',
+              100: '#fcf8f3',
+              200: '#f6ede0',
+              300: '#ebd9c3',
+              400: '#dac0a1',
             },
             cinnamon: {
+              300: '#f4a478',
               400: '#e58352',
               500: '#d97742',
-              600: '#c85a32',
+              600: '#c55e2e',
               700: '#a74320',
             },
             espresso: {
-              700: '#3a2b22',
-              800: '#2a1f18',
-              900: '#1f1610',
-              950: '#130d09',
+              600: '#4c3a2f',
+              700: '#382a21',
+              800: '#271c16',
+              900: '#1b120c',
+              950: '#0f0a07',
             },
             pistachio: {
-              100: '#eef5ec',
+              100: '#edf4ea',
               500: '#698865',
               600: '#4e6d4a',
-              700: '#385335',
             },
-            foam: '#faf5ee',
+            brass: '#d4af37',
+            foam: '#faf6f0',
           },
           boxShadow: {
-            'cafe-soft': '0 10px 30px -10px rgba(31, 22, 16, 0.07), 0 2px 6px -1px rgba(31, 22, 16, 0.04)',
-            'cafe-lift': '0 22px 40px -12px rgba(200, 90, 50, 0.16), 0 8px 16px -4px rgba(31, 22, 16, 0.06)',
-            'inner-glow': 'inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.03)',
+            'cafe-soft': '0 12px 32px -8px rgba(27, 18, 12, 0.08), 0 2px 6px -1px rgba(27, 18, 12, 0.04)',
+            'cafe-hover': '0 24px 44px -10px rgba(197, 94, 46, 0.18), 0 8px 18px -4px rgba(27, 18, 12, 0.06)',
+            'brass-plate': 'inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0,0,0,0.12)',
           }
         }
       }
@@ -62,55 +64,69 @@
 
   <style>
     body {
-      background-color: #fcf9f5;
+      background-color: #fbf7f1;
       background-image: 
-        radial-gradient(circle at 10% 8%, rgba(217, 119, 66, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 90% 15%, rgba(105, 136, 101, 0.09) 0%, transparent 40%),
-        radial-gradient(circle at 50% 95%, rgba(220, 190, 159, 0.22) 0%, transparent 55%);
+        radial-gradient(circle at 8% 6%, rgba(217, 119, 66, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 92% 12%, rgba(105, 136, 101, 0.08) 0%, transparent 38%),
+        radial-gradient(circle at 50% 90%, rgba(218, 192, 161, 0.25) 0%, transparent 50%);
       background-attachment: fixed;
     }
 
-    /* Tactile grainy cafe atmosphere overlay */
+    /* Tactile vintage paper grain */
     .grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
     }
 
+    /* Ambient cafe steam pulse */
     .steam-anim {
-      animation: steamPulse 3s ease-in-out infinite;
+      animation: steamPulse 3.5s ease-in-out infinite;
     }
-
     @keyframes steamPulse {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-3px) scale(1.05); opacity: 1; }
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.75; }
+      50% { transform: translateY(-3px) scale(1.08); opacity: 1; }
     }
 
+    /* Card micro-lift animation */
     .app-card {
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.26s ease;
+    }
+    .app-card:hover {
+      transform: translateY(-5px);
     }
 
-    .app-card:hover {
-      transform: translateY(-6px);
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f6ede0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #dac0a1;
+      border-radius: 9999px;
     }
   </style>
 </head>
 
 <body class="min-h-screen text-espresso-900 font-sans antialiased selection:bg-cinnamon-500 selection:text-white relative">
+  <!-- Subtle tactile texture overlay -->
   <div class="fixed inset-0 grain pointer-events-none z-50"></div>
 
-  <!-- Ambient light blobs -->
-  <div class="fixed -top-32 -left-32 w-80 h-80 rounded-full bg-cinnamon-400/10 blur-3xl pointer-events-none"></div>
-  <div class="fixed top-1/3 -right-32 w-96 h-96 rounded-full bg-pistachio-500/10 blur-3xl pointer-events-none"></div>
+  <!-- Warm ambient illumination spheres -->
+  <div class="fixed -top-40 -left-40 w-96 h-96 rounded-full bg-cinnamon-400/10 blur-3xl pointer-events-none"></div>
+  <div class="fixed top-1/2 -right-40 w-96 h-96 rounded-full bg-pistachio-500/10 blur-3xl pointer-events-none"></div>
+  <div class="fixed bottom-0 left-1/3 w-96 h-96 rounded-full bg-latte-300/20 blur-3xl pointer-events-none"></div>
 
   <!-- Main Container -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
 
-    <!-- Top Navigation / Cafe Menu Header -->
-    <header class="flex flex-col sm:flex-row items-center justify-between pb-8 border-b border-latte-300/80 gap-4">
+    <!-- Navigation Header -->
+    <header class="flex flex-col sm:flex-row items-center justify-between pb-6 sm:pb-8 border-b border-latte-300 gap-4">
       
-      <!-- Brand & Badge -->
+      <!-- Brand & Espresso Emblem -->
       <div class="flex items-center gap-3.5">
-        <div class="w-12 h-12 rounded-2xl bg-espresso-900 text-foam flex items-center justify-center shadow-lg shadow-espresso-950/20 transform -rotate-2 hover:rotate-0 transition-transform">
-          <!-- Steaming Coffee Cup Icon -->
+        <div class="w-12 h-12 rounded-2xl bg-espresso-900 text-foam flex items-center justify-center shadow-lg shadow-espresso-950/25 transform -rotate-2 hover:rotate-0 transition-transform">
           <svg class="w-6 h-6 text-cinnamon-400 steam-anim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
             <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
@@ -121,53 +137,61 @@
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-[11px] font-bold uppercase tracking-widest text-cinnamon-600 bg-cinnamon-500/10 px-2.5 py-0.5 rounded-full">Artisan Batch</span>
-            <span class="text-xs font-medium text-espresso-800/60 font-mono">DIGITAL CAFÉ</span>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-cinnamon-600 font-bold bg-cinnamon-500/10 px-2 py-0.5 rounded-md">SPECIALTY ROAST</span>
+            <span class="text-[11px] font-medium text-espresso-700/60 font-mono">EDITION 2026</span>
           </div>
           <h1 class="text-xl font-serif font-bold text-espresso-950 tracking-tight">The Roastery Suite</h1>
         </div>
       </div>
 
-      <!-- Live Cafe Status Pill -->
-      <div class="flex items-center gap-3 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-latte-300 shadow-cafe-soft">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pistachio-500 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-pistachio-600"></span>
-        </span>
-        <span class="text-xs font-semibold text-espresso-900">Melbourne Roastery Open</span>
-        <span class="text-espresso-800/25">|</span>
-        <span id="cafe-clock" class="text-xs font-mono font-medium text-cinnamon-600">11:47 PM</span>
+      <!-- Action Pill & Live Indicator -->
+      <div class="flex items-center gap-3">
+        <button id="quick-launcher-trigger" class="flex items-center gap-2 bg-white/90 hover:bg-white text-espresso-900 px-3.5 py-2 rounded-full border border-latte-300 shadow-sm text-xs font-semibold hover:border-cinnamon-400 transition-all">
+          <svg class="w-3.5 h-3.5 text-cinnamon-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+          <span>Flight Index</span>
+          <span class="text-[10px] font-mono bg-latte-200 text-espresso-800 px-1.5 py-0.5 rounded">16</span>
+        </button>
+
+        <div class="hidden sm:flex items-center gap-2.5 bg-white/80 backdrop-blur-md px-3.5 py-2 rounded-full border border-latte-300 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pistachio-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-pistachio-600"></span>
+          </span>
+          <span class="text-xs font-semibold text-espresso-900">Café Open</span>
+          <span class="text-espresso-800/25">|</span>
+          <span id="cafe-clock" class="text-xs font-mono font-medium text-cinnamon-600">--:--</span>
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-10 sm:pt-14 pb-8 max-w-4xl">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-latte-200 border border-latte-300/80 text-espresso-800 text-xs font-medium tracking-wide mb-5">
-        <span class="text-cinnamon-600 font-bold">★ 2026 EDITION</span>
+    <!-- Hero Title Section -->
+    <section class="pt-8 sm:pt-12 pb-6 max-w-4xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-latte-200 border border-latte-300 text-espresso-800 text-xs font-medium tracking-wide mb-4">
+        <span class="text-cinnamon-600 font-bold">★ FOUR ROWS OF FOUR</span>
         <span class="text-espresso-800/40">•</span>
-        <span>12 Handcrafted Workspaces On Tap</span>
+        <span>16 Curated Creative & Work Tools</span>
       </div>
-      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-espresso-950 leading-[1.12]">
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-espresso-950 leading-[1.12]">
         Productivity Apps <span class="italic font-normal text-cinnamon-600 font-serif">2026</span>
       </h2>
-      <p class="mt-4 text-base sm:text-lg text-espresso-800/80 leading-relaxed font-normal max-w-2xl">
-        Grab a seat, order your favorite pour-over, and sink into a focused flow. A curated flight of 12 creative canvases, acoustic labs, intelligent models, and thoughtful pauses—crafted for creators and free-thinkers.
+      <p class="mt-3.5 text-sm sm:text-base text-espresso-800/80 leading-relaxed font-normal max-w-2xl">
+        Pull up a seat at the espresso bar. A complete 16-app workspace flight featuring design studios, AI neural engines, audio labs, and independent sole-trader tools—each opening directly in its own tab.
       </p>
     </section>
 
-    <!-- Search & Filter Controls -->
-    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-4 mb-4">
-      
-      <!-- Filter Pills -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="category-filters">
-        <button data-cat="all" class="filter-tab active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-espresso-900 text-foam shadow-sm shadow-espresso-900/20">All Apps (12)</button>
-        <button data-cat="creative" class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300">Creative & Writing</button>
-        <button data-cat="audio" class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300">Audio & Media</button>
-        <button data-cat="ai" class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300">AI & Tools</button>
-        <button data-cat="social" class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300">Social & Fun</button>
+    <!-- Filters & Search Toolbar -->
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-3 mb-2">
+      <!-- Category Buttons -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="category-filters">
+        <button data-cat="all" class="filter-tab active px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-espresso-900 text-foam shadow-sm whitespace-nowrap">All Apps (16)</button>
+        <button data-cat="creative" class="filter-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300 whitespace-nowrap">Creative & Design</button>
+        <button data-cat="ai" class="filter-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300 whitespace-nowrap">AI & Prompts</button>
+        <button data-cat="audio" class="filter-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300 whitespace-nowrap">Audio & Media</button>
+        <button data-cat="business" class="filter-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300 whitespace-nowrap">Business & Utility</button>
+        <button data-cat="social" class="filter-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-white/80 hover:bg-white text-espresso-800 border border-latte-300 whitespace-nowrap">Social & Games</button>
       </div>
 
-      <!-- Quick Search Bar -->
+      <!-- Live Search Field -->
       <div class="relative w-full sm:w-72">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-espresso-800/40">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,492 +201,636 @@
         <input 
           type="text" 
           id="search-input" 
-          placeholder="Search by name or category..." 
-          class="w-full pl-10 pr-4 py-2 rounded-xl text-xs sm:text-sm bg-white/90 border border-latte-300 focus:outline-none focus:ring-2 focus:ring-cinnamon-500 focus:bg-white placeholder-espresso-800/40 transition-all shadow-sm"
+          placeholder="Filter 16 apps..." 
+          class="w-full pl-9 pr-3.5 py-2 rounded-xl text-xs sm:text-sm bg-white/95 border border-latte-300 focus:outline-none focus:ring-2 focus:ring-cinnamon-500 focus:bg-white placeholder-espresso-800/45 transition-all shadow-sm"
         />
       </div>
     </div>
 
-    <!-- 12-App Grid: Exactly 3 rows of 4 on desktop (lg:grid-cols-4), 2 cols on tablet, 1 on mobile -->
-    <main id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+    <!-- 4 Rows of 4 Columns (16 Apps) on lg screens, 2 cols on tablet, 1 on mobile -->
+    <main id="app-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-3">
 
       <!-- APP 1: Design Flow -->
-      <article data-cat="creative" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="creative" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-700 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 19 7-7 3 3-7 7-3-3z"/>
-                <path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-                <path d="m2 2 7.586 7.586"/>
-                <circle cx="11" cy="11" r="2"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-800 flex items-center justify-center group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Design</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Creative</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Design Flow</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Fluid spatial canvas, systemic wireframing, and visual architecture for design sprints.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Design Flow</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Spatial canvas, flexible vector wireframing, and systemic layout planning.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">flow-woad-three</span>
-          <a href="https://flow-woad-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">flow-woad-three</span>
+          <a href="https://flow-woad-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 2: Marketing -->
-      <article data-cat="creative" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="business" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-cinnamon-500/10 text-cinnamon-600 flex items-center justify-center group-hover:bg-cinnamon-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m3 11 18-5v12L3 14v-3z"/>
-                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-cinnamon-500/10 text-cinnamon-600 flex items-center justify-center group-hover:bg-cinnamon-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Growth</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Business</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Marketing</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Campaign strategy, pitch messaging architectures, and audience engagement toolkits.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Marketing</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Go-to-market strategies, campaign roadmaps, and audience value propositions.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">client-project-five</span>
-          <a href="https://client-project-five-weld.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">client-project-five</span>
+          <a href="https://client-project-five-weld.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 3: Authors Note -->
-      <article data-cat="creative" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="creative" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-amber-800/10 text-amber-900 flex items-center justify-center group-hover:bg-amber-800 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"/>
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-amber-800/10 text-amber-900 flex items-center justify-center group-hover:bg-amber-900 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Writing</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Writing</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Authors Note</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Distraction-free typewriter environment for long-form prose, essays, and drafts.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Authors Note</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Minimalist editorial typewriter suite for long-form prose and quiet reflection.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">authoring-nu</span>
-          <a href="https://authoring-nu.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">authoring-nu</span>
+          <a href="https://authoring-nu.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 4: Sound Studio -->
-      <article data-cat="audio" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="audio" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-700 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" y1="21" x2="4" y2="14"/>
-                <line x1="4" y1="10" x2="4" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12" y2="3"/>
-                <line x1="20" y1="21" x2="20" y2="16"/>
-                <line x1="20" y1="12" x2="20" y2="3"/>
-                <line x1="1" y1="14" x2="7" y2="14"/>
-                <line x1="9" y1="8" x2="15" y2="8"/>
-                <line x1="17" y1="16" x2="23" y2="16"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 text-indigo-700 flex items-center justify-center group-hover:bg-indigo-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Audio</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Audio</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Sound Studio</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Atmospheric pads, foley synthesizer, and custom audio layers for work sessions.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Sound Studio</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Ambient soundscape generator, synth oscillators, and bespoke cafe room acoustics.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">sfx-navy-three</span>
-          <a href="https://sfx-navy-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">sfx-navy-three</span>
+          <a href="https://sfx-navy-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 5: Speech Gen -->
-      <article data-cat="audio" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="audio" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-700 flex items-center justify-center group-hover:bg-teal-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="22"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-teal-500/10 text-teal-700 flex items-center justify-center group-hover:bg-teal-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Voice</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Voice</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Speech Gen</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Neural text-to-speech studio with expressive speech models and tempo shaping.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Speech Gen</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Expressive neural voice synthesis and vocal cadence timing for creators.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">tts-studio</span>
-          <a href="https://sfx-navy-three.vercel.app/tts-studio.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">tts-studio.html</span>
+          <a href="https://sfx-navy-three.vercel.app/tts-studio.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 6: Audio Player -->
-      <article data-cat="audio" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="audio" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-orange-500/10 text-orange-700 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-orange-500/10 text-orange-700 flex items-center justify-center group-hover:bg-orange-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Player</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Media</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Audio Player</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Minimalist analog audio player for relaxing coffeehouse playlists and podcasts.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Audio Player</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Analog turntable aesthetics for streaming warm beats, podcasts, and field sounds.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">player.html</span>
-          <a href="https://sfx-navy-three.vercel.app/player.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">player.html</span>
+          <a href="https://sfx-navy-three.vercel.app/player.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 7: Blog -->
-      <article data-cat="creative" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="creative" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-pistachio-500/10 text-pistachio-600 flex items-center justify-center group-hover:bg-pistachio-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                <line x1="8" y1="7" x2="16" y2="7"/>
-                <line x1="8" y1="11" x2="16" y2="11"/>
-                <line x1="8" y1="15" x2="12" y2="15"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-pistachio-500/15 text-pistachio-600 flex items-center justify-center group-hover:bg-pistachio-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Journal</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Journal</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Blog</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            General expression repository featuring thoughtful dispatches, essays, and stories.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Blog</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Dispatches, thought logs, and general expressions written from the corner booth.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">general-expression</span>
-          <a href="https://general-expression.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">general-expression</span>
+          <a href="https://general-expression.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 8: Ask AI -->
-      <article data-cat="ai" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="ai" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-700 flex items-center justify-center group-hover:bg-rose-600 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-rose-500/10 text-rose-700 flex items-center justify-center group-hover:bg-rose-600 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Cognition</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Neural</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Ask AI</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Neural thinking partner for fast inquiries, knowledge synthesis, and prompt brainstorming.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Ask AI</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Multi-modal conversational intellect for fast inquiries and knowledge distillation.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">ai-model-ten</span>
-          <a href="https://ai-model-ten-gamma.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">ai-model-ten</span>
+          <a href="https://ai-model-ten-gamma.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 9: Chat Room -->
-      <article data-cat="social" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="social" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-600/10 text-cyan-800 flex items-center justify-center group-hover:bg-cyan-700 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                <line x1="8" y1="10" x2="16" y2="10"/>
-                <line x1="8" y1="14" x2="12" y2="14"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-600/10 text-cyan-800 flex items-center justify-center group-hover:bg-cyan-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Lounge</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Social</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Chat Room</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Realtime community coffee room for group banter, standups, and casual watercooler chat.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Chat Room</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Realtime community coffee room for group banter, standups, and shared banter.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">group-chat</span>
-          <a href="https://group-chat-3nkg.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">group-chat-3nkg</span>
+          <a href="https://group-chat-3nkg.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 10: Multiplayer Checkers -->
-      <article data-cat="social" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="social" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-amber-600/10 text-amber-800 flex items-center justify-center group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M3 9h18"/>
-                <path d="M3 15h18"/>
-                <path d="M9 3v18"/>
-                <path d="M15 3v18"/>
-                <circle cx="6" cy="6" r="1.5" fill="currentColor"/>
-                <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-amber-700/10 text-amber-800 flex items-center justify-center group-hover:bg-amber-800 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Games</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Game</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Multiplayer Checkers</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Live internet checkerboard for coffee break tactics and casual competitive play.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Multiplayer Checkers</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Turn-based board gaming to exercise strategic thinking during coffee breaks.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">multiplayer-tawny</span>
-          <a href="https://multiplayer-tawny.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">multiplayer-tawny</span>
+          <a href="https://multiplayer-tawny.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 11: IdeaPad -->
-      <article data-cat="creative" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="creative" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-yellow-600/10 text-yellow-800 flex items-center justify-center group-hover:bg-yellow-700 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
-                <path d="M9 18h6"/>
-                <path d="M10 22h4"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-yellow-600/10 text-yellow-800 flex items-center justify-center group-hover:bg-yellow-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Ideation</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Notes</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">IdeaPad</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Spontaneous scratchpad for capturing sudden sparks, napkin sketches, and quick lists.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">IdeaPad</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Spontaneous napkin-style scratchpad for fast ideas and fleeting flashes of genius.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">idea-pad-tau</span>
-          <a href="https://idea-pad-tau.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">idea-pad-tau</span>
+          <a href="https://idea-pad-tau.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
       <!-- APP 12: Movie DB -->
-      <article data-cat="social" class="app-card group flex flex-col justify-between p-6 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-lift backdrop-blur-sm">
+      <article data-cat="social" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
         <div>
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-purple-600/10 text-purple-800 flex items-center justify-center group-hover:bg-purple-700 group-hover:text-white transition-all duration-300">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M7 3v18"/>
-                <path d="M17 3v18"/>
-                <path d="M3 7h4"/>
-                <path d="M3 12h4"/>
-                <path d="M3 17h4"/>
-                <path d="M17 7h4"/>
-                <path d="M17 12h4"/>
-                <path d="M17 17h4"/>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-purple-600/10 text-purple-800 flex items-center justify-center group-hover:bg-purple-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M17 3v18"/><path d="M3 7h4"/><path d="M3 12h4"/><path d="M3 17h4"/><path d="M17 7h4"/><path d="M17 12h4"/><path d="M17 17h4"/>
               </svg>
             </div>
-            <span class="text-[11px] font-semibold uppercase px-2.5 py-1 rounded-full bg-latte-100 text-espresso-800/70 border border-latte-300/50">Cinema</span>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Cinema</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Movie DB</h3>
-          <p class="mt-2 text-xs sm:text-sm text-espresso-800/70 leading-relaxed">
-            Curated film catalogue, movie recommendations, and watchlists for evening unwind.
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Movie DB</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Curated film discoveries, director filmographies, and curated cinephile watchlists.
           </p>
         </div>
-        <div class="pt-5 mt-4 border-t border-latte-200/80 flex items-center justify-between">
-          <span class="text-xs font-mono text-espresso-800/50 truncate max-w-[120px]">movies-sigma</span>
-          <a href="https://movies-sigma-bay.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">movies-sigma</span>
+          <a href="https://movies-sigma-bay.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
             <span>Open</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 13: Prompt Generator -->
+      <article data-cat="ai" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-600/10 text-emerald-800 flex items-center justify-center group-hover:bg-emerald-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+            </div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Prompting</span>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Prompt Generator</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Structured syntax builder, parameter modifiers, and LLM prompt crafting lab.
+          </p>
+        </div>
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">prompt-gen-app</span>
+          <a href="https://multi-task-alpha.vercel.app/prompt-gen-app.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+            <span>Open</span>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 14: 3D Character Studio -->
+      <article data-cat="creative" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-fuchsia-600/10 text-fuchsia-800 flex items-center justify-center group-hover:bg-fuchsia-700 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">3D Asset</span>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">3D Character Studio</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            3D avatar customizer, character mesh exploration, and creative posture generator.
+          </p>
+        </div>
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">character.html</span>
+          <a href="https://multi-task-alpha.vercel.app/character.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+            <span>Open</span>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 15: Interior Design AI -->
+      <article data-cat="ai" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-amber-900/10 text-amber-950 flex items-center justify-center group-hover:bg-amber-900 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Spaces</span>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Interior Design AI</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Aesthetic room styling, color palette synthesis, and moodboard space curation.
+          </p>
+        </div>
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">interior.html</span>
+          <a href="https://multi-task-alpha.vercel.app/interior.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+            <span>Open</span>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- APP 16: Sole Trader Hub -->
+      <article data-cat="business" class="app-card group flex flex-col justify-between p-5 rounded-3xl bg-white/90 hover:bg-white border border-latte-200 shadow-cafe-soft hover:shadow-cafe-hover backdrop-blur-sm">
+        <div>
+          <div class="flex items-start justify-between mb-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-blue-700/10 text-blue-800 flex items-center justify-center group-hover:bg-blue-800 group-hover:text-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-latte-100 text-espresso-800/80 border border-latte-300/60">Business</span>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">Sole Trader Hub</h3>
+          <p class="mt-1.5 text-xs text-espresso-800/75 leading-relaxed line-clamp-2">
+            Invoicing, self-employed tax overview, expenses, and freelance cashflow tracker.
+          </p>
+        </div>
+        <div class="pt-4 mt-3 border-t border-latte-200/80 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-espresso-800/50 truncate max-w-[120px]">sole-trader.html</span>
+          <a href="https://multi-task-alpha.vercel.app/sole-trader.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-espresso-900 group-hover:bg-cinnamon-600 text-foam text-xs font-semibold transition-all transform active:scale-95 shadow-sm">
+            <span>Open</span>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </article>
 
     </main>
 
-    <!-- Empty Search State -->
-    <div id="no-results" class="hidden text-center py-16">
-      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-latte-200 flex items-center justify-center text-espresso-800/40">
+    <!-- Zero State Display -->
+    <div id="no-results" class="hidden text-center py-20">
+      <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-latte-200 flex items-center justify-center text-espresso-800/50 border border-latte-300">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
-      <h3 class="text-xl font-serif font-bold text-espresso-900">No applications found</h3>
-      <p class="text-sm text-espresso-800/60 mt-1">Try another keyword or tap "All Apps" to reset.</p>
+      <h3 class="text-lg font-serif font-bold text-espresso-950">No workspaces match your query</h3>
+      <p class="text-xs text-espresso-800/60 mt-1">Try another keyword or select "All Apps (16)".</p>
     </div>
 
     <!-- Cafe Footer -->
-    <footer class="mt-20 pt-8 border-t border-latte-300/80 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-espresso-800/70">
-      <div class="flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-cinnamon-500"></span>
-        <span class="font-medium">Productivity Apps 2026 Collection &bull; Specialty digital workspaces</span>
+    <footer class="mt-16 sm:mt-20 pt-8 border-t border-latte-300 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-espresso-800/70">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-cinnamon-500 animate-pulse"></span>
+        <span class="font-medium text-espresso-900">Productivity Apps 2026 Collection</span>
+        <span class="text-espresso-800/40">•</span>
+        <span>4 Rows &bull; 16 Apps</span>
       </div>
 
-      <div class="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
-        <span>3 Rows &bull; 12 Suites</span>
-        <span>•</span>
+      <div class="flex items-center gap-4 flex-wrap justify-center font-mono">
         <button id="copy-all-btn" class="font-semibold text-cinnamon-600 hover:text-cinnamon-700 underline underline-offset-4 decoration-cinnamon-300 transition-colors">
-          Copy All 12 App Links
+          Copy All 16 App URLs
         </button>
       </div>
     </footer>
 
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-espresso-950 text-foam px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs font-medium z-50">
-    <svg class="w-4 h-4 text-pistachio-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    <span id="toast-text">Links copied to clipboard</span>
+  <!-- Quick Launcher Modal / Drawer -->
+  <div id="launcher-modal" class="fixed inset-0 bg-espresso-950/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+    <div class="bg-foam w-full max-w-xl rounded-3xl p-6 shadow-2xl border border-latte-300 transform scale-95 transition-transform duration-200 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-latte-200">
+        <div>
+          <h4 class="font-serif text-lg font-bold text-espresso-950">Specialty Flight Index</h4>
+          <p class="text-xs text-espresso-800/70">Direct single-click launcher for all 16 tools</p>
+        </div>
+        <button id="close-modal-btn" class="w-8 h-8 rounded-full bg-latte-200 hover:bg-latte-300 flex items-center justify-center text-espresso-900 text-sm font-bold transition-colors">✕</button>
+      </div>
+      
+      <div class="overflow-y-auto mt-4 pr-1 space-y-2 max-h-[60vh]" id="modal-app-list">
+        <!-- Dynamically mirrored via JS -->
+      </div>
+    </div>
   </div>
 
-  <!-- Scripting for Clock, Filter Tabs, and Search -->
+  <!-- Toast Notification Box -->
+  <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-espresso-950 text-foam px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs font-medium z-50 border border-espresso-800">
+    <svg class="w-4 h-4 text-pistachio-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toast-text">All 16 application URLs copied!</span>
+  </div>
+
   <script>
-    /* Live Cafe Clock */
-    function updateClock() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const clockEl = document.getElementById('cafe-clock');
-      if (clockEl) {
-        clockEl.textContent = timeStr;
-      }
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    /* Search & Filter logic */
-    const searchInput = document.getElementById('search-input');
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const cards = document.querySelectorAll('.app-card');
-    const noResults = document.getElementById('no-results');
-
-    let activeCat = 'all';
-    let searchQuery = '';
-
-    function filterGrid() {
-      let matches = 0;
-
-      cards.forEach(card => {
-        const cat = card.getAttribute('data-cat');
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const desc = card.querySelector('p').textContent.toLowerCase();
-
-        const catMatches = (activeCat === 'all') || (cat === activeCat);
-        const searchMatches = title.includes(searchQuery) || desc.includes(searchQuery);
-
-        if (catMatches && searchMatches) {
-          card.classList.remove('hidden');
-          card.classList.add('flex');
-          matches++;
-        } else {
-          card.classList.add('hidden');
-          card.classList.remove('flex');
+    // Safe DOM-ready execution
+    document.addEventListener('DOMContentLoaded', () => {
+      /* Live Cafe Clock */
+      function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const clockEl = document.getElementById('cafe-clock');
+        if (clockEl) {
+          clockEl.textContent = timeStr;
         }
-      });
-
-      if (matches === 0) {
-        noResults.classList.remove('hidden');
-      } else {
-        noResults.classList.add('hidden');
       }
-    }
+      setInterval(updateClock, 1000);
+      updateClock();
 
-    /* Category Filter Tab Selection */
-    filterTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        filterTabs.forEach(t => {
-          t.classList.remove('active', 'bg-espresso-900', 'text-foam', 'shadow-sm');
-          t.classList.add('bg-white/80', 'text-espresso-800', 'border', 'border-latte-300');
+      /* Filtering and Search State */
+      const searchInput = document.getElementById('search-input');
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      const cards = document.querySelectorAll('.app-card');
+      const noResults = document.getElementById('no-results');
+
+      let activeCat = 'all';
+      let searchQuery = '';
+
+      function filterGrid() {
+        let matches = 0;
+
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-cat');
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const desc = card.querySelector('p').textContent.toLowerCase();
+
+          const catMatches = (activeCat === 'all') || (cat === activeCat);
+          const searchMatches = title.includes(searchQuery) || desc.includes(searchQuery);
+
+          if (catMatches && searchMatches) {
+            card.classList.remove('hidden');
+            card.classList.add('flex');
+            matches++;
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('flex');
+          }
         });
 
-        tab.classList.add('active', 'bg-espresso-900', 'text-foam', 'shadow-sm');
-        tab.classList.remove('bg-white/80', 'text-espresso-800');
-
-        activeCat = tab.getAttribute('data-cat');
-        filterGrid();
-      });
-    });
-
-    /* Live Search Input */
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase().trim();
-      filterGrid();
-    });
-
-    /* Toast Notification trigger */
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      toastText.textContent = message;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3000);
-    }
-
-    /* Copy all app URLs using document.execCommand */
-    const copyBtn = document.getElementById('copy-all-btn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const links = Array.from(document.querySelectorAll('.app-card a')).map(a => a.href);
-        const tempTextArea = document.createElement('textarea');
-        tempTextArea.value = links.join('\n');
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        try {
-          document.execCommand('copy');
-          showToast('All 12 application URLs copied!');
-        } catch (err) {
-          showToast('Unable to copy automatically');
+        if (matches === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
         }
-        document.body.removeChild(tempTextArea);
+      }
+
+      /* Filter Tab Click */
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => {
+            t.classList.remove('active', 'bg-espresso-900', 'text-foam', 'shadow-sm');
+            t.classList.add('bg-white/80', 'text-espresso-800', 'border', 'border-latte-300');
+          });
+
+          tab.classList.add('active', 'bg-espresso-900', 'text-foam', 'shadow-sm');
+          tab.classList.remove('bg-white/80', 'text-espresso-800', 'border');
+
+          activeCat = tab.getAttribute('data-cat');
+          filterGrid();
+        });
       });
-    }
+
+      /* Live Search Input Listener */
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          filterGrid();
+        });
+      }
+
+      /* Toast notification handler */
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toast-text');
+        if (!toast || !toastText) return;
+        toastText.textContent = message;
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3200);
+      }
+
+      /* Safe clipboard copy using document.execCommand */
+      const copyBtn = document.getElementById('copy-all-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const links = Array.from(document.querySelectorAll('.app-card a')).map(a => a.href);
+          const tempArea = document.createElement('textarea');
+          tempArea.value = links.join('\n');
+          document.body.appendChild(tempArea);
+          tempArea.select();
+          try {
+            document.execCommand('copy');
+            showToast('All 16 application URLs copied to clipboard!');
+          } catch (err) {
+            showToast('Unable to copy automatically');
+          }
+          document.body.removeChild(tempArea);
+        });
+      }
+
+      /* Populate Modal Quick Index */
+      const modalList = document.getElementById('modal-app-list');
+      const launcherModal = document.getElementById('launcher-modal');
+      const triggerBtn = document.getElementById('quick-launcher-trigger');
+      const closeBtn = document.getElementById('close-modal-btn');
+
+      if (modalList) {
+        cards.forEach((card, idx) => {
+          const title = card.querySelector('h3').textContent;
+          const url = card.querySelector('a').href;
+          const badge = card.querySelector('.font-mono.uppercase').textContent;
+
+          const row = document.createElement('a');
+          row.href = url;
+          row.target = '_blank';
+          row.rel = 'noopener noreferrer';
+          row.className = 'flex items-center justify-between p-3 rounded-xl hover:bg-latte-200/80 transition-colors border border-transparent hover:border-latte-300 group';
+          row.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-cinnamon-600 font-bold">${String(idx + 1).padStart(2, '0')}</span>
+              <span class="text-sm font-semibold text-espresso-950 group-hover:text-cinnamon-600 transition-colors">${title}</span>
+            </div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-latte-100 text-espresso-800/80 border border-latte-300/50">${badge}</span>
+          `;
+          modalList.appendChild(row);
+        });
+      }
+
+      /* Modal Open/Close Controls */
+      function openModal() {
+        if (!launcherModal) return;
+        launcherModal.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          launcherModal.classList.remove('opacity-0');
+          launcherModal.firstElementChild.classList.remove('scale-95');
+        });
+      }
+
+      function closeModal() {
+        if (!launcherModal) return;
+        launcherModal.classList.add('opacity-0');
+        launcherModal.firstElementChild.classList.add('scale-95');
+        setTimeout(() => {
+          launcherModal.classList.add('hidden');
+        }, 200);
+      }
+
+      if (triggerBtn) triggerBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (launcherModal) {
+        launcherModal.addEventListener('click', (e) => {
+          if (e.target === launcherModal) closeModal();
+        });
+      }
+    });
   </script>
 </body>
 </html>
