@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniSound Studio - SFX Synthesizer, Speech Forge & Sonic Visualizer</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Color Tokens (Default: Cyberpunk Violet) */
+    :root {
+      --bg-primary: #08070d;
+      --bg-secondary: #100e1c;
+      --bg-card: rgba(22, 19, 38, 0.78);
+      --bg-card-hover: rgba(32, 28, 54, 0.9);
+      --border-color: rgba(168, 85, 247, 0.22);
+      --text-main: #f5f3ff;
+      --text-muted: #a78bfa;
+      --accent: #a855f7;
+      --accent-secondary: #ec4899;
+      --accent-glow: rgba(168, 85, 247, 0.35);
+      --accent-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+      --badge-bg: rgba(168, 85, 247, 0.16);
+      --badge-border: rgba(168, 85, 247, 0.35);
+      --wave-color: #ec4899;
+    }
+
+    /* Cyber Matrix Emerald */
+    [data-theme="matrix"] {
+      --bg-primary: #030a06;
+      --bg-secondary: #07170e;
+      --bg-card: rgba(11, 28, 18, 0.85);
+      --bg-card-hover: rgba(16, 41, 26, 0.95);
+      --border-color: rgba(16, 185, 129, 0.25);
+      --text-main: #ecfdf5;
+      --text-muted: #6ee7b7;
+      --accent: #10b981;
+      --accent-secondary: #06b6d4;
+      --accent-glow: rgba(16, 185, 129, 0.4);
+      --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(16, 185, 129, 0.35);
+      --wave-color: #06b6d4;
+    }
+
+    /* Sunset Synthwave */
+    [data-theme="synthwave"] {
+      --bg-primary: #0d0614;
+      --bg-secondary: #1a0b27;
+      --bg-card: rgba(35, 14, 52, 0.8);
+      --bg-card-hover: rgba(50, 19, 74, 0.9);
+      --border-color: rgba(244, 63, 94, 0.28);
+      --text-main: #fff1f2;
+      --text-muted: #fda4af;
+      --accent: #f43f5e;
+      --accent-secondary: #f97316;
+      --accent-gradient: linear-gradient(135deg, #f43f5e, #f97316);
+      --accent-glow: rgba(244, 63, 94, 0.4);
+      --badge-bg: rgba(244, 63, 94, 0.16);
+      --badge-border: rgba(244, 63, 94, 0.35);
+      --wave-color: #f97316;
+    }
+
+    /* Monolith Obsidian Gold */
+    [data-theme="obsidian"] {
+      --bg-primary: #0b0a08;
+      --bg-secondary: #14120f;
+      --bg-card: rgba(26, 23, 19, 0.85);
+      --bg-card-hover: rgba(36, 32, 26, 0.95);
+      --border-color: rgba(212, 175, 55, 0.25);
+      --text-main: #fefce8;
+      --text-muted: #ca8a04;
+      --accent: #eab308;
+      --accent-secondary: #ca8a04;
+      --accent-gradient: linear-gradient(135deg, #eab308, #b45309);
+      --accent-glow: rgba(234, 179, 8, 0.35);
+      --badge-bg: rgba(234, 179, 8, 0.14);
+      --badge-border: rgba(234, 179, 8, 0.35);
+      --wave-color: #facc15;
+    }
+
+    /* Arctic Deep Sea */
+    [data-theme="arctic"] {
+      --bg-primary: #040914;
+      --bg-secondary: #081329;
+      --bg-card: rgba(12, 28, 59, 0.85);
+      --bg-card-hover: rgba(18, 41, 84, 0.95);
+      --border-color: rgba(56, 189, 248, 0.25);
+      --text-main: #f0f9ff;
+      --text-muted: #7dd3fc;
+      --accent: #38bdf8;
+      --accent-secondary: #818cf8;
+      --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
+      --accent-glow: rgba(56, 189, 248, 0.38);
+      --badge-bg: rgba(56, 189, 248, 0.15);
+      --badge-border: rgba(56, 189, 248, 0.35);
+      --wave-color: #38bdf8;
+    }
+
+    /* Rose Quartz */
+    [data-theme="rose"] {
+      --bg-primary: #12070c;
+      --bg-secondary: #1f0d15;
+      --bg-card: rgba(43, 17, 29, 0.82);
+      --bg-card-hover: rgba(61, 23, 41, 0.92);
+      --border-color: rgba(244, 114, 182, 0.25);
+      --text-main: #fdf2f8;
+      --text-muted: #f472b6;
+      --accent: #f472b6;
+      --accent-secondary: #fb7185;
+      --accent-gradient: linear-gradient(135deg, #f472b6, #fb7185);
+      --accent-glow: rgba(244, 114, 182, 0.35);
+      --badge-bg: rgba(244, 114, 182, 0.15);
+      --badge-border: rgba(244, 114, 182, 0.35);
+      --wave-color: #fb7185;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .theme-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .theme-input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .theme-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .nav-btn {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-btn.active {
+      background: var(--badge-bg);
+      color: var(--text-main);
+      border-color: var(--accent);
+      box-shadow: 0 4px 24px var(--accent-glow);
+    }
+
+    .param-chip {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+    }
+
+    .param-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .param-chip.active {
+      background: var(--badge-bg);
+      border-color: var(--accent);
+      color: var(--text-main);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Range slider styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: var(--bg-secondary);
+      border-radius: 9999px;
+      height: 6px;
+      border: 1px solid var(--border-color);
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--accent-glow);
+      transition: transform 0.1s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body class="selection:bg-purple-600 selection:text-white pb-16">
+
+  <header class="sticky top-0 z-40 border-b border-[var(--border-color)] bg-[var(--bg-primary)]/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand & Studio Suite Logo -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--accent-glow)]" style="background: var(--accent-gradient);">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-extrabold tracking-tight">OmniSound<span class="text-xs uppercase px-2 py-0.5 ml-2 rounded-full tracking-wider font-mono font-bold" style="background: var(--badge-bg); color: var(--accent); border: 1px solid var(--badge-border);">Audio Engine</span></h1>
+          </div>
+          <p class="text-xs text-[var(--text-muted)] hidden sm:block">Procedural SFX Synth • Speech Forge (TTS) • Sonic Deck Visualizer</p>
+        </div>
+      </div>
+
+      <!-- Controls & Theme Palette Selection -->
+      <div class="flex items-center gap-3">
+        <!-- Palette Switcher -->
+        <div class="relative flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)]">
+          <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+          <label for="themeSelect" class="text-xs font-semibold hidden md:inline">Theme:</label>
+          <select id="themeSelect" class="bg-transparent text-xs font-medium focus:outline-none cursor-pointer pr-1">
+            <option value="default" class="bg-gray-900 text-purple-300">Cyberpunk Violet</option>
+            <option value="matrix" class="bg-gray-900 text-emerald-300">Cyber Matrix</option>
+            <option value="synthwave" class="bg-gray-900 text-pink-300">Sunset Synthwave</option>
+            <option value="obsidian" class="bg-gray-900 text-amber-300">Obsidian Gold</option>
+            <option value="arctic" class="bg-gray-900 text-sky-300">Arctic Deep Sea</option>
+            <option value="rose" class="bg-gray-900 text-rose-300">Rose Quartz</option>
+          </select>
+        </div>
+
+        <!-- Master Audio Engine State Badge -->
+        <div id="audioStatusBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>DSP ACTIVE</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <nav class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+      
+      <!-- Mini-app 1 Tab: SFX Studio -->
+      <button onclick="switchAppTab('sfx')" id="tab-sfx" class="nav-btn active p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-purple-500/30 bg-purple-500/10 group-hover:scale-105 transition-transform">
+          <!-- Synthesizer Oscillating Wave Icon -->
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Engine 01</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">SFX Synthesizer</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Procedural audio fx, sweeps, lasers & WAV export</p>
+        </div>
+      </button>
+
+      <!-- Mini-app 2 Tab: Speech Gen / TTS -->
+      <button onclick="switchAppTab('tts')" id="tab-tts" class="nav-btn p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-sky-500/30 bg-sky-500/10 group-hover:scale-105 transition-transform">
+          <!-- Vocal Waves / Speech Icon -->
+          <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-semibold">Engine 02</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">Speech Forge (TTS)</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Multi-voice vocal synthesis, emotions & styles</p>
+        </div>
+      </button>
+
+      <!-- Mini-app 3 Tab: Sonic Deck Audio Player -->
+      <button onclick="switchAppTab('player')" id="tab-player" class="nav-btn p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-pink-500/30 bg-pink-500/10 group-hover:scale-105 transition-transform">
+          <!-- Real-Time Spectrum Player Icon -->
+          <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-pink-400 font-semibold">Engine 03</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">Sonic Deck Player</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Visualizer, dynamic playlists, EQ & speed</p>
+        </div>
+      </button>
+
+    </nav>
+
+    <div id="section-sfx" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Controls Column -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-6">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">1. Quick Presets & Synthesizer Archetypes</h3>
+                <p class="text-xs text-[var(--text-muted)]">Select pre-tuned procedural sound recipes or mutate parameters.</p>
+              </div>
+              <button onclick="randomizeSfx()" class="px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-xs font-semibold flex items-center gap-1.5 text-[var(--accent)] transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Mutate Random
+              </button>
+            </div>
+
+            <!-- Preset Buttons Matrix -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button onclick="loadSfxPreset('laser')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">⚡ Laser Blast</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Sci-Fi Zap Sweep</span>
+              </button>
+              <button onclick="loadSfxPreset('coin')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🪙 Power-Up / Coin</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Dual-Tone Arp</span>
+              </button>
+              <button onclick="loadSfxPreset('explosion')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">💥 Boom Explosion</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Sub-Bass Noise</span>
+              </button>
+              <button onclick="loadSfxPreset('jump')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🕹️ Retro Jump</span>
+                <span class="text-[10px] text-[var(--text-muted)]">8-bit Pitch Rise</span>
+              </button>
+              <button onclick="loadSfxPreset('warp')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🌀 Warp Drive</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Biquad Filter Mod</span>
+              </button>
+              <button onclick="loadSfxPreset('hit')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🥊 Impact Hit</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Punchy Transient</span>
+              </button>
+              <button onclick="loadSfxPreset('ui')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🖱️ Modern Click</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Crisp Micro Pop</span>
+              </button>
+              <button onclick="loadSfxPreset('drone')" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-left group transition-all">
+                <span class="text-xs font-bold block text-[var(--text-main)] group-hover:text-[var(--accent)]">🌌 Cosmic Drone</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Sub Harmonic Pad</span>
+              </button>
+            </div>
+
+            <!-- Waveform & Filter Controls -->
+            <div class="space-y-4 pt-2">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Oscillator & Envelope Synthesis</h4>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1">Waveform Mode</label>
+                  <select id="sfx-wave" class="w-full p-2.5 rounded-xl theme-input text-xs font-mono">
+                    <option value="sine">Sine (Pure / Sub)</option>
+                    <option value="square">Square (8-bit Classic)</option>
+                    <option value="sawtooth" selected>Sawtooth (Buzzy Sci-Fi)</option>
+                    <option value="triangle">Triangle (Flute / Punch)</option>
+                    <option value="noise">Noise (Explosion / Gust)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1">Filter Type</label>
+                  <select id="sfx-filter-type" class="w-full p-2.5 rounded-xl theme-input text-xs font-mono">
+                    <option value="lowpass" selected>Lowpass (Muffle Highs)</option>
+                    <option value="highpass">Highpass (Thin / Sharp)</option>
+                    <option value="bandpass">Bandpass (Radio / Whistle)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Parameter Sliders -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <!-- Start Frequency -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">Start Frequency</span>
+                    <span id="label-start-freq" class="font-mono text-[var(--accent)] font-semibold">880 Hz</span>
+                  </div>
+                  <input id="slider-start-freq" type="range" min="40" max="3000" step="10" value="880" oninput="updateSfxLabels()" class="w-full">
+                </div>
+
+                <!-- End Frequency (Pitch Bend) -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">End Pitch (Sweep)</span>
+                    <span id="label-end-freq" class="font-mono text-[var(--accent)] font-semibold">120 Hz</span>
+                  </div>
+                  <input id="slider-end-freq" type="range" min="20" max="3000" step="10" value="120" oninput="updateSfxLabels()" class="w-full">
+                </div>
+
+                <!-- Attack Time -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">Attack (Seconds)</span>
+                    <span id="label-attack" class="font-mono text-[var(--accent)] font-semibold">0.01 s</span>
+                  </div>
+                  <input id="slider-attack" type="range" min="0.001" max="0.5" step="0.005" value="0.01" oninput="updateSfxLabels()" class="w-full">
+                </div>
+
+                <!-- Decay / Duration -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">Decay / Duration</span>
+                    <span id="label-decay" class="font-mono text-[var(--accent)] font-semibold">0.35 s</span>
+                  </div>
+                  <input id="slider-decay" type="range" min="0.05" max="3.0" step="0.05" value="0.35" oninput="updateSfxLabels()" class="w-full">
+                </div>
+
+                <!-- Filter Cutoff -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">Filter Cutoff</span>
+                    <span id="label-cutoff" class="font-mono text-[var(--accent)] font-semibold">2400 Hz</span>
+                  </div>
+                  <input id="slider-cutoff" type="range" min="100" max="10000" step="100" value="2400" oninput="updateSfxLabels()" class="w-full">
+                </div>
+
+                <!-- Resonance (Q) -->
+                <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-[var(--text-muted)]">Resonance (Q)</span>
+                    <span id="label-q" class="font-mono text-[var(--accent)] font-semibold">5.0</span>
+                  </div>
+                  <input id="slider-q" type="range" min="0.1" max="25" step="0.5" value="5.0" oninput="updateSfxLabels()" class="w-full">
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Action Trigger & WAV Downloader -->
+            <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[var(--border-color)]">
+              <button onclick="playSynthesizedSfx()" class="flex-1 py-3 px-6 rounded-2xl text-sm font-bold text-white shadow-xl shadow-[var(--accent-glow)] transition-transform active:scale-95 flex items-center justify-center gap-2" style="background: var(--accent-gradient);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Play Synthesized SFX (Space)
+              </button>
+
+              <button onclick="downloadSfxAsWav()" class="py-3 px-5 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-xs font-bold text-[var(--text-main)] transition-colors flex items-center gap-2" title="Synthesize PCM & Export WAV File">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Export .WAV
+              </button>
+
+              <button onclick="sendSfxToPlayerDeck()" class="py-3 px-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-pink-500 text-xs font-bold text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-1.5" title="Add directly to Player Playlist">
+                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Add to Deck
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time SFX Oscilloscope & Activity Feed -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-ping"></span>
+                SFX Real-time Waveform
+              </h4>
+              <span id="sfx-status-tag" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[var(--badge-bg)] text-[var(--accent)] border border-[var(--badge-border)]">DSP Ready</span>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden border border-[var(--border-color)] bg-black/60 aspect-[16/9] flex items-center justify-center">
+              <canvas id="sfxCanvas" class="w-full h-full block"></canvas>
+              <div id="sfxCenterGlow" class="absolute pointer-events-none w-24 h-24 rounded-full bg-[var(--accent-glow)] blur-2xl opacity-20"></div>
+            </div>
+
+            <!-- Parameters Summary Table -->
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+              <div class="p-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+                <span class="text-[10px] text-[var(--text-muted)] block">DSP SAMPLE RATE</span>
+                <span class="font-bold text-[var(--accent)]">44,100 Hz 32-bit</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+                <span class="text-[10px] text-[var(--text-muted)] block">BUFFER RENDER</span>
+                <span id="summary-render-size" class="font-bold text-[var(--accent)]">0.36s (PCM)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SFX History List -->
+          <div class="theme-card p-6 rounded-3xl space-y-3">
+            <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Synthesized FX Logs</h4>
+              <button onclick="clearSfxLog()" class="text-[10px] text-rose-400 hover:underline">Clear</button>
+            </div>
+            <div id="sfxHistoryContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+              <div class="text-xs text-[var(--text-muted)] italic text-center py-4">Trigger or synthesize any SFX to populate live cache!</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="section-tts" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Speech Input & Voice Selection -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">2. Vocal Persona & Speech Synthesis</h3>
+                <p class="text-xs text-[var(--text-muted)]">Synthesize speech with customized pacing, inflection and emotional presets.</p>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span id="ttsEngineActiveBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">SpeechSynthesis OK</span>
+              </div>
+            </div>
+
+            <!-- Text area for speech -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide">Script / Dialogue Input</label>
+                <button onclick="loadSampleTtsScript()" class="text-xs text-[var(--accent)] hover:underline">Insert Sample Script</button>
+              </div>
+              <textarea id="tts-input-text" rows="4" class="w-full p-4 rounded-2xl theme-input text-sm resize-none leading-relaxed font-sans" placeholder="Type dialogue or narrative text here... E.g. 'Initializing quantum sub-routine. All neural networks operational and awaiting command.'"></textarea>
+            </div>
+
+            <!-- Emotion & Style Presets -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wide">Vocal Mood & Style Presets</label>
+              <div class="flex flex-wrap gap-2" id="tts-mood-chips">
+                <button onclick="applyTtsMood('natural', this)" class="param-chip active px-3.5 py-1.5 rounded-xl text-xs font-medium">Standard Natural</button>
+                <button onclick="applyTtsMood('robotic', this)" class="param-chip px-3.5 py-1.5 rounded-xl text-xs font-medium">🤖 Robotic AI Core</button>
+                <button onclick="applyTtsMood('dramatic', this)" class="param-chip px-3.5 py-1.5 rounded-xl text-xs font-medium">🎭 Dramatic Trailer</button>
+                <button onclick="applyTtsMood('whisper', this)" class="param-chip px-3.5 py-1.5 rounded-xl text-xs font-medium">🌌 Cosmic Whisper</button>
+                <button onclick="applyTtsMood('fast', this)" class="param-chip px-3.5 py-1.5 rounded-xl text-xs font-medium">⚡ Auctioneer Warp</button>
+                <button onclick="applyTtsMood('storyteller', this)" class="param-chip px-3.5 py-1.5 rounded-xl text-xs font-medium">📖 Gentle Storyteller</button>
+              </div>
+            </div>
+
+            <!-- Voice Selector Dropdown -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Detected Hardware Voice</label>
+                <select id="tts-voice-select" class="w-full p-2.5 rounded-xl theme-input text-xs font-mono">
+                  <option value="">Searching device voice catalog...</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Language Filter</label>
+                <select id="tts-lang-filter" onchange="filterVoicesByLang()" class="w-full p-2.5 rounded-xl theme-input text-xs font-mono">
+                  <option value="all">All Languages (Global)</option>
+                  <option value="en">English Only (en-*)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Pitch, Rate & Volume Sliders -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-[var(--text-muted)]">Pitch (Inflection)</span>
+                  <span id="label-tts-pitch" class="font-mono text-[var(--accent)] font-semibold">1.0x</span>
+                </div>
+                <input id="slider-tts-pitch" type="range" min="0.1" max="2.0" step="0.05" value="1.0" oninput="updateTtsLabels()" class="w-full">
+              </div>
+
+              <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-[var(--text-muted)]">Rate (Pacing)</span>
+                  <span id="label-tts-rate" class="font-mono text-[var(--accent)] font-semibold">1.0x</span>
+                </div>
+                <input id="slider-tts-rate" type="range" min="0.2" max="2.5" step="0.05" value="1.0" oninput="updateTtsLabels()" class="w-full">
+              </div>
+
+              <div class="p-3 rounded-2xl theme-input space-y-1.5">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-[var(--text-muted)]">Gain (Volume)</span>
+                  <span id="label-tts-volume" class="font-mono text-[var(--accent)] font-semibold">1.0</span>
+                </div>
+                <input id="slider-tts-volume" type="range" min="0" max="1" step="0.05" value="1.0" oninput="updateTtsLabels()" class="w-full">
+              </div>
+            </div>
+
+            <!-- Speech Action Triggers -->
+            <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[var(--border-color)]">
+              <button id="ttsPlayBtn" onclick="speakCurrentText()" class="flex-1 py-3 px-6 rounded-2xl text-sm font-bold text-white shadow-xl shadow-[var(--accent-glow)] transition-transform active:scale-95 flex items-center justify-center gap-2" style="background: var(--accent-gradient);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Speak Script
+              </button>
+
+              <button onclick="pauseResumeTts()" class="py-3 px-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-xs font-bold text-[var(--text-main)] transition-colors flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Pause / Resume
+              </button>
+
+              <button onclick="stopTts()" class="py-3 px-4 rounded-2xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-bold text-rose-300 transition-colors flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Speech Telemetry & Phonetic Helper -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-4">
+            <h4 class="text-sm font-bold flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Speech Telemetry & Word Monitor
+            </h4>
+
+            <div class="p-4 rounded-2xl theme-input font-mono text-xs space-y-2">
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-1.5">
+                <span class="text-[var(--text-muted)]">Current Word:</span>
+                <span id="tts-live-word" class="font-bold text-[var(--accent)] text-sm">--</span>
+              </div>
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-1.5">
+                <span class="text-[var(--text-muted)]">Character Index:</span>
+                <span id="tts-live-char" class="text-[var(--text-main)]">0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--text-muted)]">State:</span>
+                <span id="tts-live-state" class="text-emerald-400 font-semibold">Idle</span>
+              </div>
+            </div>
+
+            <!-- Phonetic / SSML Helper Card -->
+            <div class="space-y-2 pt-2">
+              <span class="text-xs font-semibold text-[var(--text-muted)]">Quick Phonetic Injections:</span>
+              <div class="flex flex-wrap gap-1.5">
+                <button onclick="injectTtsMarkup('...') " class="px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[10px] font-mono hover:border-[var(--accent)]">+ [Pause ...]</button>
+                <button onclick="injectTtsMarkup('— ')" class="px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[10px] font-mono hover:border-[var(--accent)]">+ [Em-Dash —]</button>
+                <button onclick="injectTtsMarkup('!!! ')" class="px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[10px] font-mono hover:border-[var(--accent)]">+ [Emphasis !!!]</button>
+                <button onclick="injectTtsMarkup('? ')" class="px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[10px] font-mono hover:border-[var(--accent)]">+ [Inflection ?]</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Speech Script Snippets -->
+          <div class="theme-card p-6 rounded-3xl space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Curated Speech Dialogues</h4>
+            <div class="space-y-2">
+              <button onclick="setTtsDialogue(0)" class="w-full p-2.5 text-left rounded-xl theme-input hover:border-[var(--accent)] text-xs transition-all">
+                <div class="font-bold text-[var(--text-main)]">Sci-Fi Ship Announcement</div>
+                <div class="text-[10px] text-[var(--text-muted)] truncate">Hyperdrive disengaged. Approaching Kepler orbital colony.</div>
+              </button>
+              <button onclick="setTtsDialogue(1)" class="w-full p-2.5 text-left rounded-xl theme-input hover:border-[var(--accent)] text-xs transition-all">
+                <div class="font-bold text-[var(--text-main)]">Fantasy Lore Prologue</div>
+                <div class="text-[10px] text-[var(--text-muted)] truncate">Beyond the shattered peaks of Eldoria, an ember still burned in the ash.</div>
+              </button>
+              <button onclick="setTtsDialogue(2)" class="w-full p-2.5 text-left rounded-xl theme-input hover:border-[var(--accent)] text-xs transition-all">
+                <div class="font-bold text-[var(--text-main)]">Tech OS Boot Sequence</div>
+                <div class="text-[10px] text-[var(--text-muted)] truncate">System diagnostic complete. Memory matrices calibrated at 100 percent.</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="section-player" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Main Player & Realtime Canvas Visualizer -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-6">
+            
+            <!-- Visualizer Header & Modes -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">3. Sonic Spectrum & Frequency Deck</h3>
+                <p class="text-xs text-[var(--text-muted)]">Real-time Web Audio FFT visualizer and track playback engine.</p>
+              </div>
+
+              <!-- Visualizer style toggle -->
+              <div class="flex items-center gap-1.5 p-1 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-xs font-mono">
+                <button onclick="setVisMode('bars')" id="visBtnBars" class="px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent)] font-bold">FFT Bars</button>
+                <button onclick="setVisMode('wave')" id="visBtnWave" class="px-2.5 py-1 rounded-lg text-[var(--text-muted)] hover:text-white">Waveform</button>
+                <button onclick="setVisMode('circular')" id="visBtnCircle" class="px-2.5 py-1 rounded-lg text-[var(--text-muted)] hover:text-white">Radial</button>
+              </div>
+            </div>
+
+            <!-- Canvas Screen -->
+            <div class="relative rounded-3xl overflow-hidden border border-[var(--border-color)] bg-black/80 aspect-[21/9] flex items-center justify-center shadow-2xl">
+              <canvas id="playerCanvas" class="w-full h-full block"></canvas>
+              <div class="absolute top-4 left-4 flex items-center gap-2 pointer-events-none">
+                <span id="deckPlayBadge" class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                <span id="deckTrackName" class="text-xs font-mono font-bold tracking-wider text-white uppercase drop-shadow">No Track Active</span>
+              </div>
+              <div class="absolute bottom-4 right-4 pointer-events-none text-right font-mono text-[10px] text-white/70">
+                <span id="deckCurrentTime">00:00</span> / <span id="deckTotalDuration">00:00</span>
+              </div>
+            </div>
+
+            <!-- Scrubber / Seek Bar -->
+            <div class="space-y-1.5">
+              <input id="deckSeekBar" type="range" min="0" max="100" value="0" step="0.1" oninput="onSeekChange(this.value)" class="w-full cursor-pointer">
+              <div class="flex justify-between items-center text-[10px] font-mono text-[var(--text-muted)]">
+                <span>SEEK HEAD</span>
+                <span id="seekPercentLabel">0.0%</span>
+              </div>
+            </div>
+
+            <!-- Playback Control Center -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+              <div class="flex items-center gap-3">
+                <!-- Prev Track -->
+                <button onclick="prevDeckTrack()" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-[var(--text-main)] transition-colors" title="Previous Track">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"/></svg>
+                </button>
+
+                <!-- Play/Pause Primary -->
+                <button id="deckMasterPlayBtn" onclick="toggleDeckPlayback()" class="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[var(--accent-glow)] transition-transform active:scale-95" style="background: var(--accent-gradient);">
+                  <svg id="deckPlayIcon" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6V4z"/></svg>
+                  <svg id="deckPauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                </button>
+
+                <!-- Next Track -->
+                <button onclick="nextDeckTrack()" class="p-3 rounded-2xl theme-input hover:border-[var(--accent)] text-[var(--text-main)] transition-colors" title="Next Track">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11.555 5.168A1 1 0 0010 6v2.798L4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4z"/></svg>
+                </button>
+
+                <!-- Loop Toggle -->
+                <button id="deckLoopBtn" onclick="toggleDeckLoop()" class="p-3 rounded-2xl theme-input text-[var(--text-muted)] hover:text-white transition-colors" title="Loop Mode">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                </button>
+              </div>
+
+              <!-- Speed & Master Volume Deck Controls -->
+              <div class="flex items-center gap-4">
+                <!-- Playback Rate -->
+                <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+                  <span class="text-[10px] font-mono text-[var(--text-muted)]">SPEED:</span>
+                  <select id="deckSpeedSelect" onchange="setDeckPlaybackSpeed(this.value)" class="bg-transparent text-xs font-mono font-bold focus:outline-none cursor-pointer">
+                    <option value="0.75" class="bg-gray-900">0.75x</option>
+                    <option value="1.0" selected class="bg-gray-900">1.0x</option>
+                    <option value="1.25" class="bg-gray-900">1.25x</option>
+                    <option value="1.5" class="bg-gray-900">1.5x</option>
+                    <option value="2.0" class="bg-gray-900">2.0x</option>
+                  </select>
+                </div>
+
+                <!-- Deck Volume Slider -->
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                  <input id="deckVolumeSlider" type="range" min="0" max="1" step="0.05" value="0.8" oninput="setDeckVolume(this.value)" class="w-20 sm:w-28">
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload Custom File Option -->
+            <div class="pt-3 border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3">
+              <label class="px-4 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-xs font-semibold cursor-pointer flex items-center gap-2 transition-all">
+                <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                Load Local Audio (.mp3, .wav, .ogg)
+                <input type="file" id="localAudioInput" accept="audio/*" class="hidden" onchange="handleAudioUpload(event)">
+              </label>
+
+              <!-- Equalizer EQ Quick Preset Selector -->
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-mono text-[var(--text-muted)]">EQ PROFILE:</span>
+                <select id="deckEqPreset" onchange="applyDeckEqPreset(this.value)" class="p-1.5 rounded-xl theme-input text-xs font-mono">
+                  <option value="flat">Flat / Direct</option>
+                  <option value="bass">Bass Boost (+6dB Sub)</option>
+                  <option value="vocal">Vocal Clarity</option>
+                  <option value="electronic">Electronic EDM Sparkle</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Playlist & Track Queue Column -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+              <div>
+                <h4 class="text-sm font-bold">Sonic Playlist</h4>
+                <p class="text-[10px] text-[var(--text-muted)] font-mono" id="playlistCounter">3 Built-in Procedural Tracks</p>
+              </div>
+              <button onclick="synthesizeNewProceduralTrack()" class="px-2.5 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[11px] font-bold text-[var(--accent)] hover:border-[var(--accent)] transition-all flex items-center gap-1">
+                + Synth Track
+              </button>
+            </div>
+
+            <div id="playlistContainer" class="space-y-2 max-h-96 overflow-y-auto pr-1">
+              <!-- Dynamically populated tracks -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <div id="appToast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="px-5 py-3 rounded-2xl bg-gray-950 border border-purple-500/40 text-purple-200 shadow-2xl flex items-center gap-3 text-xs font-semibold backdrop-blur-xl">
+      <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+      <span id="appToastMsg">Audio synthesized successfully!</span>
+    </div>
+  </div>
+
+  <script>
+    /* ====================================================================
+       GLOBAL WEB AUDIO & SYSTEM STATE
+       ==================================================================== */
+    let audioCtx = null;
+    let sfxCanvas, sfxCtx;
+    let playerCanvas, playerCtx;
+    let visualizerAnimId = null;
+    let sfxAnimId = null;
+    let visualizerMode = 'bars'; // 'bars', 'wave', 'circular'
+
+    // Master Player Web Audio Routing
+    let deckAudioElement = new Audio();
+    let deckSourceNode = null;
+    let deckAnalyser = null;
+    let deckGainNode = null;
+    let deckBiquadLow = null;
+    let deckBiquadHigh = null;
+    let isDeckLooping = false;
+
+    // SFX Analyser
+    let sfxAnalyser = null;
+
+    // Track Queue
+    let playlist = [
+      {
+        id: 1,
+        title: "Neon Cybernetic Pulse",
+        artist: "Procedural Arp Core",
+        duration: "0:08",
+        url: null, // Generated dynamically via Web Audio Buffer
+        type: "procedural_arp"
+      },
+      {
+        id: 2,
+        title: "Deep Space Atmosphere",
+        artist: "Harmonic Drone Sub",
+        duration: "0:12",
+        url: null,
+        type: "procedural_drone"
+      },
+      {
+        id: 3,
+        title: "Retro 8-Bit Victory Fanfare",
+        artist: "Chiptune Arcade",
+        duration: "0:06",
+        url: null,
+        type: "procedural_chiptune"
+      }
+    ];
+    let currentTrackIndex = 0;
+    let sfxHistory = [];
+
+    /* Ensure Web Audio Context is unlocked on user gesture */
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    /* Initialize Audio Deck Nodes */
+    function initPlayerAudioNodes() {
+      const ctx = getAudioContext();
+      if (!deckSourceNode) {
+        deckSourceNode = ctx.createMediaElementSource(deckAudioElement);
+        deckAnalyser = ctx.createAnalyser();
+        deckAnalyser.fftSize = 256;
+        deckGainNode = ctx.createGain();
+
+        // Dual band filters for EQ profiles
+        deckBiquadLow = ctx.createBiquadFilter();
+        deckBiquadLow.type = 'lowshelf';
+        deckBiquadLow.frequency.value = 250;
+
+        deckBiquadHigh = ctx.createBiquadFilter();
+        deckBiquadHigh.type = 'highshelf';
+        deckBiquadHigh.frequency.value = 3500;
+
+        // Route: Source -> LowEQ -> HighEQ -> Gain -> Analyser -> Destination
+        deckSourceNode.connect(deckBiquadLow);
+        deckBiquadLow.connect(deckBiquadHigh);
+        deckBiquadHigh.connect(deckGainNode);
+        deckGainNode.connect(deckAnalyser);
+        deckAnalyser.connect(ctx.destination);
+      }
+    }
+
+    /* ====================================================================
+       1. SFX PROCEDURAL SYNTHESIZER ENGINE
+       ==================================================================== */
+    function updateSfxLabels() {
+      document.getElementById('label-start-freq').innerText = document.getElementById('slider-start-freq').value + " Hz";
+      document.getElementById('label-end-freq').innerText = document.getElementById('slider-end-freq').value + " Hz";
+      document.getElementById('label-attack').innerText = document.getElementById('slider-attack').value + " s";
+      document.getElementById('label-decay').innerText = document.getElementById('slider-decay').value + " s";
+      document.getElementById('label-cutoff').innerText = document.getElementById('slider-cutoff').value + " Hz";
+      document.getElementById('label-q').innerText = parseFloat(document.getElementById('slider-q').value).toFixed(1);
+    }
+
+    const SFX_PRESETS = {
+      laser: {
+        wave: 'sawtooth',
+        startFreq: 1400,
+        endFreq: 80,
+        attack: 0.005,
+        decay: 0.22,
+        filter: 'lowpass',
+        cutoff: 3500,
+        q: 8.0,
+        name: "Laser Blast"
+      },
+      coin: {
+        wave: 'square',
+        startFreq: 987,
+        endFreq: 1318,
+        attack: 0.01,
+        decay: 0.35,
+        filter: 'lowpass',
+        cutoff: 5000,
+        q: 2.0,
+        name: "Power-up Coin"
+      },
+      explosion: {
+        wave: 'noise',
+        startFreq: 220,
+        endFreq: 30,
+        attack: 0.01,
+        decay: 0.85,
+        filter: 'lowpass',
+        cutoff: 1200,
+        q: 4.0,
+        name: "Sub Explosion"
+      },
+      jump: {
+        wave: 'square',
+        startFreq: 160,
+        endFreq: 640,
+        attack: 0.02,
+        decay: 0.25,
+        filter: 'lowpass',
+        cutoff: 4000,
+        q: 1.5,
+        name: "Retro Jump"
+      },
+      warp: {
+        wave: 'sine',
+        startFreq: 300,
+        endFreq: 1200,
+        attack: 0.1,
+        decay: 0.75,
+        filter: 'bandpass',
+        cutoff: 1500,
+        q: 12.0,
+        name: "Warp Teleport"
+      },
+      hit: {
+        wave: 'triangle',
+        startFreq: 320,
+        endFreq: 45,
+        attack: 0.002,
+        decay: 0.18,
+        filter: 'lowpass',
+        cutoff: 2000,
+        q: 3.0,
+        name: "Punch Impact"
+      },
+      ui: {
+        wave: 'sine',
+        startFreq: 1800,
+        endFreq: 2400,
+        attack: 0.001,
+        decay: 0.06,
+        filter: 'highpass',
+        cutoff: 1000,
+        q: 1.0,
+        name: "Micro Click"
+      },
+      drone: {
+        wave: 'sawtooth',
+        startFreq: 110,
+        endFreq: 95,
+        attack: 0.3,
+        decay: 1.8,
+        filter: 'lowpass',
+        cutoff: 600,
+        q: 6.0,
+        name: "Cosmic Drone"
+      }
+    };
+
+    function loadSfxPreset(key) {
+      const p = SFX_PRESETS[key];
+      if (!p) return;
+      document.getElementById('sfx-wave').value = p.wave;
+      document.getElementById('slider-start-freq').value = p.startFreq;
+      document.getElementById('slider-end-freq').value = p.endFreq;
+      document.getElementById('slider-attack').value = p.attack;
+      document.getElementById('slider-decay').value = p.decay;
+      document.getElementById('sfx-filter-type').value = p.filter;
+      document.getElementById('slider-cutoff').value = p.cutoff;
+      document.getElementById('slider-q').value = p.q;
+
+      updateSfxLabels();
+      playSynthesizedSfx();
+      showToast("Loaded preset: " + p.name);
+    }
+
+    function randomizeSfx() {
+      const waves = ['sine', 'square', 'sawtooth', 'triangle', 'noise'];
+      const wave = waves[Math.floor(Math.random() * waves.length)];
+      const startFreq = Math.floor(Math.random() * 2200) + 60;
+      const endFreq = Math.floor(Math.random() * 2000) + 40;
+      const attack = (Math.random() * 0.15 + 0.002).toFixed(3);
+      const decay = (Math.random() * 1.2 + 0.1).toFixed(2);
+      const cutoff = Math.floor(Math.random() * 6000) + 300;
+      const q = (Math.random() * 15 + 0.5).toFixed(1);
+
+      document.getElementById('sfx-wave').value = wave;
+      document.getElementById('slider-start-freq').value = startFreq;
+      document.getElementById('slider-end-freq').value = endFreq;
+      document.getElementById('slider-attack').value = attack;
+      document.getElementById('slider-decay').value = decay;
+      document.getElementById('slider-cutoff').value = cutoff;
+      document.getElementById('slider-q').value = q;
+
+      updateSfxLabels();
+      playSynthesizedSfx();
+      showToast("Mutated random SFX patch!");
+    }
+
+    /* Helper: Create custom White/Pink Noise Buffer */
+    function createNoiseBuffer(ctx, duration) {
+      const bufferSize = ctx.sampleRate * duration;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+      return buffer;
+    }
+
+    /* Real-Time Synthesizer Execution */
+    function playSynthesizedSfx() {
+      const ctx = getAudioContext();
+
+      const waveType = document.getElementById('sfx-wave').value;
+      const startFreq = parseFloat(document.getElementById('slider-start-freq').value);
+      const endFreq = parseFloat(document.getElementById('slider-end-freq').value);
+      const attack = parseFloat(document.getElementById('slider-attack').value);
+      const decay = parseFloat(document.getElementById('slider-decay').value);
+      const filterType = document.getElementById('sfx-filter-type').value;
+      const cutoff = parseFloat(document.getElementById('slider-cutoff').value);
+      const q = parseFloat(document.getElementById('slider-q').value);
+
+      const totalTime = attack + decay;
+      const now = ctx.currentTime;
+
+      // Master Analyser hook for SFX Canvas
+      if (!sfxAnalyser) {
+        sfxAnalyser = ctx.createAnalyser();
+        sfxAnalyser.fftSize = 256;
+      }
+
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.linearRampToValueAtTime(0.7, now + attack);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + totalTime);
+
+      const filterNode = ctx.createBiquadFilter();
+      filterNode.type = filterType;
+      filterNode.frequency.setValueAtTime(cutoff, now);
+      filterNode.Q.setValueAtTime(q, now);
+
+      if (waveType === 'noise') {
+        const noiseSource = ctx.createBufferSource();
+        noiseSource.buffer = createNoiseBuffer(ctx, totalTime);
+        noiseSource.connect(filterNode);
+        filterNode.connect(gainNode);
+        noiseSource.start(now);
+        noiseSource.stop(now + totalTime);
+      } else {
+        const osc = ctx.createOscillator();
+        osc.type = waveType;
+        osc.frequency.setValueAtTime(startFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(endFreq, 10), now + totalTime);
+
+        osc.connect(filterNode);
+        filterNode.connect(gainNode);
+        osc.start(now);
+        osc.stop(now + totalTime);
+      }
+
+      // Connect to analyser & speakers
+      gainNode.connect(sfxAnalyser);
+      sfxAnalyser.connect(ctx.destination);
+
+      // Pulse UI
+      logSfxExecution(waveType, startFreq, endFreq, totalTime);
+      startSfxVisualizer();
+    }
+
+    /* Convert AudioBuffer to WAV File Blob (PCM 16-bit) */
+    function audioBufferToWavBlob(buffer) {
+      const numOfChan = buffer.numberOfChannels;
+      const length = buffer.length * numOfChan * 2 + 44;
+      const out = new DataView(new ArrayBuffer(length));
+      const channels = [];
+      let sample = 0;
+      let offset = 0;
+      let pos = 0;
+
+      function setUint16(data) { out.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { out.setUint32(pos, data, true); pos += 4; }
+
+      // Write WAV Container Header
+      setUint32(0x46464952); // "RIFF"
+      setUint32(length - 8); // file length - 8
+      setUint32(0x45564157); // "WAVE"
+
+      setUint32(0x20746d66); // "fmt " chunk
+      setUint32(16);         // 16 for PCM
+      setUint16(1);          // Linear PCM
+      setUint16(numOfChan);
+      setUint32(buffer.sampleRate);
+      setUint32(buffer.sampleRate * 2 * numOfChan); // byte rate
+      setUint16(numOfChan * 2);                    // block align
+      setUint16(16);                               // 16-bit
+
+      setUint32(0x61746164); // "data" chunk
+      setUint32(length - pos - 4);
+
+      for (let i = 0; i < buffer.numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+      }
+
+      while (offset < buffer.length) {
+        for (let i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          out.setInt16(pos, sample, true);
+          pos += 2;
+        }
+        offset++;
+      }
+
+      return new Blob([out], { type: "audio/wav" });
+    }
+
+    /* Procedural Offline Audio Context Renderer for WAV Export */
+    function renderSfxOfflineBuffer(callback) {
+      const sampleRate = 44100;
+      const waveType = document.getElementById('sfx-wave').value;
+      const startFreq = parseFloat(document.getElementById('slider-start-freq').value);
+      const endFreq = parseFloat(document.getElementById('slider-end-freq').value);
+      const attack = parseFloat(document.getElementById('slider-attack').value);
+      const decay = parseFloat(document.getElementById('slider-decay').value);
+      const filterType = document.getElementById('sfx-filter-type').value;
+      const cutoff = parseFloat(document.getElementById('slider-cutoff').value);
+      const q = parseFloat(document.getElementById('slider-q').value);
+      const totalTime = attack + decay;
+
+      const offlineCtx = new OfflineAudioContext(1, Math.ceil(sampleRate * totalTime), sampleRate);
+
+      const gain = offlineCtx.createGain();
+      gain.gain.setValueAtTime(0.0001, 0);
+      gain.gain.linearRampToValueAtTime(0.7, attack);
+      gain.gain.exponentialRampToValueAtTime(0.0001, totalTime);
+
+      const filter = offlineCtx.createBiquadFilter();
+      filter.type = filterType;
+      filter.frequency.setValueAtTime(cutoff, 0);
+      filter.Q.setValueAtTime(q, 0);
+
+      if (waveType === 'noise') {
+        const noise = offlineCtx.createBufferSource();
+        noise.buffer = createNoiseBuffer(offlineCtx, totalTime);
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(offlineCtx.destination);
+        noise.start(0);
+      } else {
+        const osc = offlineCtx.createOscillator();
+        osc.type = waveType;
+        osc.frequency.setValueAtTime(startFreq, 0);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(endFreq, 10), totalTime);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(offlineCtx.destination);
+        osc.start(0);
+      }
+
+      offlineCtx.startRendering().then(renderedBuffer => {
+        callback(renderedBuffer);
+      });
+    }
+
+    function downloadSfxAsWav() {
+      renderSfxOfflineBuffer(renderedBuffer => {
+        const blob = audioBufferToWavBlob(renderedBuffer);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `sfx_${Date.now()}.wav`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("Exported WAV audio to downloads!");
+      });
+    }
+
+    function sendSfxToPlayerDeck() {
+      renderSfxOfflineBuffer(renderedBuffer => {
+        const blob = audioBufferToWavBlob(renderedBuffer);
+        const url = URL.createObjectURL(blob);
+        const newTrack = {
+          id: Date.now(),
+          title: "Synthesized SFX #" + (playlist.length + 1),
+          artist: "User DSP Synth",
+          duration: `${renderedBuffer.duration.toFixed(2)}s`,
+          url: url,
+          type: "custom"
+        };
+        playlist.unshift(newTrack);
+        renderPlaylist();
+        switchAppTab('player');
+        loadDeckTrack(0, true);
+        showToast("Added synthesized SFX directly to Player Deck!");
+      });
+    }
+
+    function logSfxExecution(wave, fStart, fEnd, duration) {
+      const container = document.getElementById('sfxHistoryContainer');
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      sfxHistory.unshift({ wave, fStart, fEnd, duration, timeStr });
+      if (sfxHistory.length > 8) sfxHistory.pop();
+
+      container.innerHTML = sfxHistory.map(item => `
+        <div class="p-2 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] flex items-center justify-between text-[11px] font-mono">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span class="text-[var(--text-main)] font-semibold uppercase">${item.wave}</span>
+            <span class="text-[var(--text-muted)]">${item.fStart}Hz ➔ ${item.fEnd}Hz</span>
+          </div>
+          <span class="text-[10px] text-[var(--text-muted)]">${item.duration.toFixed(2)}s</span>
+        </div>
+      `).join('');
+    }
+
+    function clearSfxLog() {
+      sfxHistory = [];
+      document.getElementById('sfxHistoryContainer').innerHTML = `<div class="text-xs text-[var(--text-muted)] italic text-center py-4">Logs cleared.</div>`;
+    }
+
+    /* SFX Realtime Canvas Visualizer */
+    function startSfxVisualizer() {
+      if (!sfxCanvas) {
+        sfxCanvas = document.getElementById('sfxCanvas');
+        sfxCtx = sfxCanvas.getContext('2d');
+      }
+
+      sfxCanvas.width = sfxCanvas.clientWidth * window.devicePixelRatio;
+      sfxCanvas.height = sfxCanvas.clientHeight * window.devicePixelRatio;
+
+      const bufferLength = sfxAnalyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      function draw() {
+        sfxAnimId = requestAnimationFrame(draw);
+        sfxAnalyser.getByteTimeDomainData(dataArray);
+
+        sfxCtx.fillStyle = 'rgba(8, 7, 13, 0.25)';
+        sfxCtx.fillRect(0, 0, sfxCanvas.width, sfxCanvas.height);
+
+        sfxCtx.lineWidth = 3 * window.devicePixelRatio;
+        sfxCtx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#a855f7';
+        sfxCtx.beginPath();
+
+        const sliceWidth = sfxCanvas.width / bufferLength;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const v = dataArray[i] / 128.0;
+          const y = (v * sfxCanvas.height) / 2;
+
+          if (i === 0) {
+            sfxCtx.moveTo(x, y);
+          } else {
+            sfxCtx.lineTo(x, y);
+          }
+          x += sliceWidth;
+        }
+
+        sfxCtx.lineTo(sfxCanvas.width, sfxCanvas.height / 2);
+        sfxCtx.stroke();
+      }
+
+      cancelAnimationFrame(sfxAnimId);
+      draw();
+      setTimeout(() => cancelAnimationFrame(sfxAnimId), 1800);
+    }
+
+    /* ====================================================================
+       2. SPEECH GEN / TTS STUDIO ENGINE
+       ==================================================================== */
+    let systemVoices = [];
+    let currentUtterance = null;
+
+    function populateVoices() {
+      if (!('speechSynthesis' in window)) {
+        document.getElementById('ttsEngineActiveBadge').innerText = "TTS Not Supported";
+        document.getElementById('ttsEngineActiveBadge').className = "text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30";
+        return;
+      }
+
+      systemVoices = window.speechSynthesis.getVoices();
+      const voiceSelect = document.getElementById('tts-voice-select');
+      const filter = document.getElementById('tts-lang-filter').value;
+      voiceSelect.innerHTML = '';
+
+      const filtered = systemVoices.filter(v => {
+        if (filter === 'en') return v.lang.startsWith('en');
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        voiceSelect.innerHTML = `<option value="">Default System Voice</option>`;
+        return;
+      }
+
+      filtered.forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = voice.name;
+        option.textContent = `${voice.name} (${voice.lang})${voice.default ? ' — [System Default]' : ''}`;
+        voiceSelect.appendChild(option);
+      });
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = populateVoices;
+    }
+
+    function filterVoicesByLang() {
+      populateVoices();
+    }
+
+    function updateTtsLabels() {
+      document.getElementById('label-tts-pitch').innerText = document.getElementById('slider-tts-pitch').value + "x";
+      document.getElementById('label-tts-rate').innerText = document.getElementById('slider-tts-rate').value + "x";
+      document.getElementById('label-tts-volume').innerText = document.getElementById('slider-tts-volume').value;
+    }
+
+    function applyTtsMood(mood, element) {
+      document.querySelectorAll('#tts-mood-chips .param-chip').forEach(c => c.classList.remove('active'));
+      if (element) element.classList.add('active');
+
+      const pitch = document.getElementById('slider-tts-pitch');
+      const rate = document.getElementById('slider-tts-rate');
+      const vol = document.getElementById('slider-tts-volume');
+
+      switch (mood) {
+        case 'natural':
+          pitch.value = 1.0; rate.value = 1.0; vol.value = 1.0; break;
+        case 'robotic':
+          pitch.value = 0.4; rate.value = 0.85; vol.value = 1.0; break;
+        case 'dramatic':
+          pitch.value = 0.7; rate.value = 0.75; vol.value = 1.0; break;
+        case 'whisper':
+          pitch.value = 1.4; rate.value = 0.8; vol.value = 0.45; break;
+        case 'fast':
+          pitch.value = 1.2; rate.value = 2.0; vol.value = 1.0; break;
+        case 'storyteller':
+          pitch.value = 0.9; rate.value = 0.9; vol.value = 0.95; break;
+      }
+      updateTtsLabels();
+      showToast("Applied vocal style: " + mood.toUpperCase());
+    }
+
+    function speakCurrentText() {
+      if (!('speechSynthesis' in window)) {
+        showToast("Speech Synthesis is not supported in this browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const text = document.getElementById('tts-input-text').value.trim();
+      if (!text) {
+        showToast("Please enter speech text first!");
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      const selectedVoiceName = document.getElementById('tts-voice-select').value;
+      const voice = systemVoices.find(v => v.name === selectedVoiceName);
+      if (voice) utterance.voice = voice;
+
+      utterance.pitch = parseFloat(document.getElementById('slider-tts-pitch').value);
+      utterance.rate = parseFloat(document.getElementById('slider-tts-rate').value);
+      utterance.volume = parseFloat(document.getElementById('slider-tts-volume').value);
+
+      const liveWord = document.getElementById('tts-live-word');
+      const liveChar = document.getElementById('tts-live-char');
+      const liveState = document.getElementById('tts-live-state');
+
+      utterance.onstart = () => {
+        liveState.innerText = "Speaking...";
+        liveState.className = "text-[var(--accent)] font-semibold";
+      };
+
+      utterance.onboundary = (event) => {
+        liveChar.innerText = event.charIndex;
+        if (event.name === 'word') {
+          const spoken = text.substring(event.charIndex, event.charIndex + (event.charLength || 10)).split(/\s+/)[0];
+          liveWord.innerText = spoken;
+        }
+      };
+
+      utterance.onend = () => {
+        liveState.innerText = "Completed";
+        liveState.className = "text-emerald-400 font-semibold";
+        liveWord.innerText = "--";
+      };
+
+      utterance.onerror = () => {
+        liveState.innerText = "Stopped";
+        liveState.className = "text-rose-400 font-semibold";
+      };
+
+      currentUtterance = utterance;
+      window.speechSynthesis.speak(utterance);
+      showToast("Synthesizing voice playback...");
+    }
+
+    function pauseResumeTts() {
+      if (!('speechSynthesis' in window)) return;
+      if (window.speechSynthesis.speaking) {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+          document.getElementById('tts-live-state').innerText = "Resumed";
+        } else {
+          window.speechSynthesis.pause();
+          document.getElementById('tts-live-state').innerText = "Paused";
+        }
+      }
+    }
+
+    function stopTts() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      document.getElementById('tts-live-state').innerText = "Cancelled";
+      document.getElementById('tts-live-word').innerText = "--";
+    }
+
+    function injectTtsMarkup(token) {
+      const textarea = document.getElementById('tts-input-text');
+      textarea.value += token;
+      textarea.focus();
+    }
+
+    const SAMPLE_DIALOGUES = [
+      "Attention starship crew. Hyperdrive sequence complete. Standard atmospheric vectors confirmed for landing.",
+      "Beyond the crumbling spires of the forgotten citadel, a solitary dragon kept vigil over the primordial flame.",
+      "OmniSound kernel initialized. Dynamic spectral audio engines calibrated and ready for sonic operations."
+    ];
+
+    function setTtsDialogue(index) {
+      document.getElementById('tts-input-text').value = SAMPLE_DIALOGUES[index];
+      speakCurrentText();
+    }
+
+    function loadSampleTtsScript() {
+      document.getElementById('tts-input-text').value = "Welcome to OmniSound Studio. All three engines—SFX synthesizer, speech forge, and audio player deck—are completely operational in this single unified environment.";
+    }
+
+    /* ====================================================================
+       3. SONIC DECK AUDIO PLAYER & CANVAS VISUALIZER
+       ==================================================================== */
+    function initVisualizerCanvas() {
+      playerCanvas = document.getElementById('playerCanvas');
+      playerCtx = playerCanvas.getContext('2d');
+
+      function resize() {
+        playerCanvas.width = playerCanvas.clientWidth * window.devicePixelRatio;
+        playerCanvas.height = playerCanvas.clientHeight * window.devicePixelRatio;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    }
+
+    function setVisMode(mode) {
+      visualizerMode = mode;
+      document.getElementById('visBtnBars').className = mode === 'bars' ? 'px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent)] font-bold' : 'px-2.5 py-1 rounded-lg text-[var(--text-muted)] hover:text-white';
+      document.getElementById('visBtnWave').className = mode === 'wave' ? 'px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent)] font-bold' : 'px-2.5 py-1 rounded-lg text-[var(--text-muted)] hover:text-white';
+      document.getElementById('visBtnCircle').className = mode === 'circular' ? 'px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent)] font-bold' : 'px-2.5 py-1 rounded-lg text-[var(--text-muted)] hover:text-white';
+    }
+
+    function startDeckVisualizerLoop() {
+      if (!deckAnalyser || !playerCtx) return;
+
+      const bufferLength = deckAnalyser.frequencyBinCount;
+      const freqData = new Uint8Array(bufferLength);
+      const timeData = new Uint8Array(bufferLength);
+
+      function renderFrame() {
+        visualizerAnimId = requestAnimationFrame(renderFrame);
+
+        deckAnalyser.getByteFrequencyData(freqData);
+        deckAnalyser.getByteTimeDomainData(timeData);
+
+        const w = playerCanvas.width;
+        const h = playerCanvas.height;
+
+        playerCtx.fillStyle = 'rgba(4, 3, 8, 0.3)';
+        playerCtx.fillRect(0, 0, w, h);
+
+        const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#a855f7';
+        const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--wave-color').trim() || '#ec4899';
+
+        if (visualizerMode === 'bars') {
+          const barWidth = (w / bufferLength) * 2.2;
+          let posX = 0;
+
+          for (let i = 0; i < bufferLength; i++) {
+            const barHeight = (freqData[i] / 255) * h * 0.9;
+            const grad = playerCtx.createLinearGradient(0, h, 0, h - barHeight);
+            grad.addColorStop(0, accentColor);
+            grad.addColorStop(1, waveColor);
+
+            playerCtx.fillStyle = grad;
+            playerCtx.fillRect(posX, h - barHeight, barWidth - 2, barHeight);
+            posX += barWidth;
+          }
+
+        } else if (visualizerMode === 'wave') {
+          playerCtx.lineWidth = 3 * window.devicePixelRatio;
+          playerCtx.strokeStyle = waveColor;
+          playerCtx.beginPath();
+
+          const sliceWidth = w / bufferLength;
+          let x = 0;
+
+          for (let i = 0; i < bufferLength; i++) {
+            const v = timeData[i] / 128.0;
+            const y = (v * h) / 2;
+
+            if (i === 0) {
+              playerCtx.moveTo(x, y);
+            } else {
+              playerCtx.lineTo(x, y);
+            }
+            x += sliceWidth;
+          }
+          playerCtx.lineTo(w, h / 2);
+          playerCtx.stroke();
+
+        } else if (visualizerMode === 'circular') {
+          const centerX = w / 2;
+          const centerY = h / 2;
+          const radius = Math.min(centerX, centerY) * 0.45;
+
+          playerCtx.beginPath();
+          playerCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+          playerCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+          playerCtx.stroke();
+
+          for (let i = 0; i < bufferLength; i += 2) {
+            const rad = (i / bufferLength) * 2 * Math.PI;
+            const barLen = (freqData[i] / 255) * radius * 0.8;
+
+            const xStart = centerX + Math.cos(rad) * radius;
+            const yStart = centerY + Math.sin(rad) * radius;
+            const xEnd = centerX + Math.cos(rad) * (radius + barLen);
+            const yEnd = centerY + Math.sin(rad) * (radius + barLen);
+
+            playerCtx.strokeStyle = i % 4 === 0 ? accentColor : waveColor;
+            playerCtx.lineWidth = 2 * window.devicePixelRatio;
+            playerCtx.beginPath();
+            playerCtx.moveTo(xStart, yStart);
+            playerCtx.lineTo(xEnd, yEnd);
+            playerCtx.stroke();
+          }
+        }
+      }
+
+      cancelAnimationFrame(visualizerAnimId);
+      renderFrame();
+    }
+
+    /* Synthesize Procedural Audio Tracks into Blobs for Player Demo */
+    function generateDemoTrackBlob(type, callback) {
+      const sampleRate = 44100;
+      let duration = 8;
+      if (type === 'procedural_drone') duration = 12;
+      if (type === 'procedural_chiptune') duration = 6;
+
+      const offline = new OfflineAudioContext(1, sampleRate * duration, sampleRate);
+
+      if (type === 'procedural_arp') {
+        const chord = [220, 277.18, 329.63, 440, 554.37, 659.25];
+        const step = 0.2;
+        const totalNotes = Math.floor(duration / step);
+
+        for (let i = 0; i < totalNotes; i++) {
+          const osc = offline.createOscillator();
+          const gain = offline.createGain();
+          const f = chord[i % chord.length];
+
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(f, i * step);
+
+          gain.gain.setValueAtTime(0.0001, i * step);
+          gain.gain.linearRampToValueAtTime(0.25, i * step + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, (i + 1) * step);
+
+          osc.connect(gain);
+          gain.connect(offline.destination);
+          osc.start(i * step);
+          osc.stop((i + 1) * step);
+        }
+      } else if (type === 'procedural_drone') {
+        const freqs = [55, 110, 164.81, 220];
+        freqs.forEach(f => {
+          const osc = offline.createOscillator();
+          const gain = offline.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = f;
+          gain.gain.value = 0.15;
+          osc.connect(gain);
+          gain.connect(offline.destination);
+          osc.start(0);
+          osc.stop(duration);
+        });
+      } else if (type === 'procedural_chiptune') {
+        const notes = [440, 440, 659.25, 880, 783.99, 659.25, 523.25, 587.33];
+        const step = 0.25;
+        notes.forEach((freq, idx) => {
+          const osc = offline.createOscillator();
+          const gain = offline.createGain();
+          osc.type = 'square';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.2, idx * step);
+          gain.gain.exponentialRampToValueAtTime(0.001, (idx + 1) * step);
+          osc.connect(gain);
+          gain.connect(offline.destination);
+          osc.start(idx * step);
+          osc.stop((idx + 1) * step);
+        });
+      }
+
+      offline.startRendering().then(renderedBuffer => {
+        const blob = audioBufferToWavBlob(renderedBuffer);
+        callback(URL.createObjectURL(blob));
+      });
+    }
+
+    function renderPlaylist() {
+      const container = document.getElementById('playlistContainer');
+      document.getElementById('playlistCounter').innerText = `${playlist.length} Loaded Tracks`;
+
+      container.innerHTML = playlist.map((track, i) => `
+        <div onclick="loadDeckTrack(${i}, true)" class="p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between group ${i === currentTrackIndex ? 'border-[var(--accent)] bg-[var(--badge-bg)]' : 'border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)]'}">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-mono font-bold ${i === currentTrackIndex ? 'bg-[var(--accent)] text-white' : 'bg-black/40 text-[var(--text-muted)]'}">${i + 1}</span>
+            <div class="truncate">
+              <div class="text-xs font-bold text-[var(--text-main)] truncate">${track.title}</div>
+              <div class="text-[10px] text-[var(--text-muted)] truncate">${track.artist}</div>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-[var(--text-muted)] shrink-0">${track.duration}</span>
+        </div>
+      `).join('');
+    }
+
+    function loadDeckTrack(index, autoPlay = false) {
+      initPlayerAudioNodes();
+      currentTrackIndex = index;
+      const track = playlist[index];
+      if (!track) return;
+
+      document.getElementById('deckTrackName').innerText = track.title;
+      document.getElementById('deckPlayBadge').className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
+
+      if (!track.url && track.type) {
+        showToast("Rendering synthesized audio buffer...");
+        generateDemoTrackBlob(track.type, url => {
+          track.url = url;
+          deckAudioElement.src = url;
+          if (autoPlay) playDeckAudio();
+        });
+      } else {
+        deckAudioElement.src = track.url;
+        if (autoPlay) playDeckAudio();
+      }
+
+      renderPlaylist();
+    }
+
+    function playDeckAudio() {
+      getAudioContext();
+      initPlayerAudioNodes();
+      deckAudioElement.play().then(() => {
+        document.getElementById('deckPlayIcon').classList.add('hidden');
+        document.getElementById('deckPauseIcon').classList.remove('hidden');
+        startDeckVisualizerLoop();
+      }).catch(err => {
+        console.warn("Autoplay gesture required", err);
+      });
+    }
+
+    function pauseDeckAudio() {
+      deckAudioElement.pause();
+      document.getElementById('deckPlayIcon').classList.remove('hidden');
+      document.getElementById('deckPauseIcon').classList.add('hidden');
+    }
+
+    function toggleDeckPlayback() {
+      if (deckAudioElement.paused) {
+        playDeckAudio();
+      } else {
+        pauseDeckAudio();
+      }
+    }
+
+    function prevDeckTrack() {
+      const newIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+      loadDeckTrack(newIndex, true);
+    }
+
+    function nextDeckTrack() {
+      const newIndex = (currentTrackIndex + 1) % playlist.length;
+      loadDeckTrack(newIndex, true);
+    }
+
+    function toggleDeckLoop() {
+      isDeckLooping = !isDeckLooping;
+      deckAudioElement.loop = isDeckLooping;
+      const btn = document.getElementById('deckLoopBtn');
+      if (isDeckLooping) {
+        btn.classList.add('border-[var(--accent)]', 'text-[var(--accent)]', 'bg-[var(--badge-bg)]');
+        showToast("Looping: ON");
+      } else {
+        btn.classList.remove('border-[var(--accent)]', 'text-[var(--accent)]', 'bg-[var(--badge-bg)]');
+        showToast("Looping: OFF");
+      }
+    }
+
+    function setDeckPlaybackSpeed(val) {
+      deckAudioElement.playbackRate = parseFloat(val);
+      showToast(`Playback speed set to ${val}x`);
+    }
+
+    function setDeckVolume(val) {
+      if (deckGainNode) {
+        deckGainNode.gain.value = parseFloat(val);
+      }
+    }
+
+    function onSeekChange(val) {
+      if (deckAudioElement.duration) {
+        deckAudioElement.currentTime = (val / 100) * deckAudioElement.duration;
+      }
+    }
+
+    function handleAudioUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const url = URL.createObjectURL(file);
+      const newTrack = {
+        id: Date.now(),
+        title: file.name.replace(/\.[^/.]+$/, ""),
+        artist: "Uploaded Audio",
+        duration: "Direct",
+        url: url,
+        type: "uploaded"
+      };
+
+      playlist.unshift(newTrack);
+      renderPlaylist();
+      loadDeckTrack(0, true);
+      showToast("Uploaded and mapped local track!");
+    }
+
+    function applyDeckEqPreset(preset) {
+      initPlayerAudioNodes();
+      if (!deckBiquadLow || !deckBiquadHigh) return;
+
+      switch (preset) {
+        case 'flat':
+          deckBiquadLow.gain.value = 0;
+          deckBiquadHigh.gain.value = 0;
+          break;
+        case 'bass':
+          deckBiquadLow.gain.value = 7;
+          deckBiquadHigh.gain.value = -2;
+          break;
+        case 'vocal':
+          deckBiquadLow.gain.value = -3;
+          deckBiquadHigh.gain.value = 5;
+          break;
+        case 'electronic':
+          deckBiquadLow.gain.value = 6;
+          deckBiquadHigh.gain.value = 6;
+          break;
+      }
+      showToast("Applied EQ profile: " + preset.toUpperCase());
+    }
+
+    function synthesizeNewProceduralTrack() {
+      const types = ['procedural_arp', 'procedural_drone', 'procedural_chiptune'];
+      const chosen = types[Math.floor(Math.random() * types.length)];
+      const names = ["Quantum Neon Drift", "Sub-Zero Stargate", "Hyperion Synth Core", "Retro Stellar Blast"];
+      const randomName = names[Math.floor(Math.random() * names.length)] + ` #${playlist.length + 1}`;
+
+      showToast("Generating procedural audio buffer...");
+      generateDemoTrackBlob(chosen, url => {
+        playlist.push({
+          id: Date.now(),
+          title: randomName,
+          artist: "Procedural Engine",
+          duration: chosen === 'procedural_drone' ? '0:12' : '0:08',
+          url: url,
+          type: chosen
+        });
+        renderPlaylist();
+        showToast("Created & appended new procedural track!");
+      });
+    }
+
+    // Audio Element Event Listeners for Seek Bar & Duration
+    deckAudioElement.ontimeupdate = () => {
+      const cur = deckAudioElement.currentTime || 0;
+      const dur = deckAudioElement.duration || 1;
+      const pct = (cur / dur) * 100;
+
+      document.getElementById('deckSeekBar').value = pct;
+      document.getElementById('seekPercentLabel').innerText = pct.toFixed(1) + "%";
+
+      const curMin = Math.floor(cur / 60);
+      const curSec = Math.floor(cur % 60);
+      document.getElementById('deckCurrentTime').innerText = `${curMin}:${curSec < 10 ? '0' : ''}${curSec}`;
+
+      if (!isNaN(dur)) {
+        const durMin = Math.floor(dur / 60);
+        const durSec = Math.floor(dur % 60);
+        document.getElementById('deckTotalDuration').innerText = `${durMin}:${durSec < 10 ? '0' : ''}${durSec}`;
+      }
+    };
+
+    deckAudioElement.onended = () => {
+      if (!isDeckLooping) nextDeckTrack();
+    };
+
+    /* ====================================================================
+       TAB NAVIGATION & GENERAL UTILITIES
+       ==================================================================== */
+    function switchAppTab(appId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('tab-' + appId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('section-sfx').classList.add('hidden');
+      document.getElementById('section-tts').classList.add('hidden');
+      document.getElementById('section-player').classList.add('hidden');
+
+      document.getElementById('section-' + appId).classList.remove('hidden');
+
+      if (appId === 'player') {
+        setTimeout(() => {
+          initVisualizerCanvas();
+          if (!deckAudioElement.paused) startDeckVisualizerLoop();
+        }, 50);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('appToast');
+      const toastMsg = document.getElementById('appToastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2400);
+    }
+
+    // Theme Selector Change Handler
+    document.getElementById('themeSelect').addEventListener('change', (e) => {
+      const theme = e.target.value;
+      if (theme === 'default') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      showToast("Switched palette: " + e.target.options[e.target.selectedIndex].text);
+    });
+
+    // Global Key Listener (Space to trigger SFX when in SFX tab)
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        const sfxSection = document.getElementById('section-sfx');
+        if (!sfxSection.classList.contains('hidden')) {
+          e.preventDefault();
+          playSynthesizedSfx();
+        }
+      }
+    });
+
+    /* Window Load Bootstrapper */
+    window.onload = function() {
+      updateSfxLabels();
+      updateTtsLabels();
+      loadSampleTtsScript();
+      populateVoices();
+      renderPlaylist();
+      loadDeckTrack(0, false);
+      initVisualizerCanvas();
+    };
+  </script>
+</body>
+</html>
