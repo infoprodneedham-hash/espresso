@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniPrompt Studio - AI Prompt, Character & Interior Generator</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base Theme Variables */
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-secondary: #12161f;
+      --bg-card: rgba(22, 28, 38, 0.75);
+      --bg-card-hover: rgba(29, 37, 51, 0.9);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.35);
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --badge-bg: rgba(99, 102, 241, 0.15);
+      --badge-border: rgba(99, 102, 241, 0.3);
+    }
+
+    /* Cyber Neon Theme */
+    [data-theme="cyberpunk"] {
+      --bg-primary: #05050c;
+      --bg-secondary: #0d0d1a;
+      --bg-card: rgba(18, 16, 38, 0.85);
+      --bg-card-hover: rgba(28, 24, 58, 0.95);
+      --border-color: rgba(0, 240, 255, 0.2);
+      --text-main: #f8fafc;
+      --text-muted: #a5b4fc;
+      --accent: #00f0ff;
+      --accent-glow: rgba(0, 240, 255, 0.45);
+      --accent-gradient: linear-gradient(135deg, #00f0ff, #ff007f);
+      --badge-bg: rgba(0, 240, 255, 0.12);
+      --badge-border: rgba(0, 240, 255, 0.4);
+    }
+
+    /* Obsidian Gold Luxury */
+    [data-theme="obsidian"] {
+      --bg-primary: #0c0b09;
+      --bg-secondary: #161513;
+      --bg-card: rgba(26, 24, 21, 0.85);
+      --bg-card-hover: rgba(36, 33, 29, 0.95);
+      --border-color: rgba(212, 175, 55, 0.22);
+      --text-main: #fbf7ee;
+      --text-muted: #bda882;
+      --accent: #d4af37;
+      --accent-glow: rgba(212, 175, 55, 0.35);
+      --accent-gradient: linear-gradient(135deg, #d4af37, #f3e5ab);
+      --badge-bg: rgba(212, 175, 55, 0.12);
+      --badge-border: rgba(212, 175, 55, 0.35);
+    }
+
+    /* Emerald Forest Theme */
+    [data-theme="emerald"] {
+      --bg-primary: #04120e;
+      --bg-secondary: #082119;
+      --bg-card: rgba(10, 36, 28, 0.8);
+      --bg-card-hover: rgba(15, 52, 40, 0.9);
+      --border-color: rgba(52, 211, 153, 0.2);
+      --text-main: #f0fdf4;
+      --text-muted: #6ee7b7;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.4);
+      --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(16, 185, 129, 0.35);
+    }
+
+    /* Sunset Pastel / Warm Terracotta */
+    [data-theme="sunset"] {
+      --bg-primary: #140d12;
+      --bg-secondary: #22141c;
+      --bg-card: rgba(43, 25, 36, 0.8);
+      --bg-card-hover: rgba(58, 33, 49, 0.9);
+      --border-color: rgba(251, 146, 60, 0.25);
+      --text-main: #fff7ed;
+      --text-muted: #fdba74;
+      --accent: #f97316;
+      --accent-glow: rgba(249, 115, 22, 0.4);
+      --accent-gradient: linear-gradient(135deg, #f97316, #ec4899);
+      --badge-bg: rgba(249, 115, 22, 0.15);
+      --badge-border: rgba(249, 115, 22, 0.35);
+    }
+
+    /* Minimal Nordic Light Theme */
+    [data-theme="nordic"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #ffffff;
+      --border-color: rgba(15, 23, 42, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.25);
+      --accent-gradient: linear-gradient(135deg, #2563eb, #0ea5e9);
+      --badge-bg: rgba(37, 99, 235, 0.08);
+      --badge-border: rgba(37, 99, 235, 0.25);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .theme-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .theme-card:hover {
+      border-color: var(--border-color);
+    }
+
+    .theme-input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .theme-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .tag-chip {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+    }
+
+    .tag-chip.active {
+      background: var(--badge-bg);
+      border-color: var(--accent);
+      color: var(--text-main);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .nav-btn {
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .nav-btn.active {
+      background: var(--badge-bg);
+      color: var(--text-main);
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+
+  <header class="sticky top-0 z-40 border-b border-[var(--border-color)] bg-[var(--bg-primary)]/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Main Brand & Tool Selector -->
+      <div class="flex items-center gap-3 md:gap-5">
+        <div class="w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--accent-glow)]" style="background: var(--accent-gradient);">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-extrabold tracking-tight">OmniPrompt<span class="text-xs uppercase px-2 py-0.5 ml-2 rounded-full tracking-wider font-mono font-bold" style="background: var(--badge-bg); color: var(--accent); border: 1px solid var(--badge-border);">v3.5 Unified</span></h1>
+          </div>
+          <p class="text-xs text-[var(--text-muted)] hidden sm:block">AI Prompter • Character Forge • Interior Spatial Designer</p>
+        </div>
+      </div>
+
+      <!-- Theme Switcher & Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Palette Dropdown -->
+        <div class="relative flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)]">
+          <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+          <label for="themeSelect" class="text-xs font-semibold hidden md:inline">Theme:</label>
+          <select id="themeSelect" class="bg-transparent text-xs font-medium focus:outline-none cursor-pointer pr-1">
+            <option value="default" class="bg-gray-900 text-white">Default Iris</option>
+            <option value="cyberpunk" class="bg-gray-900 text-white">Cyber Neon</option>
+            <option value="obsidian" class="bg-gray-900 text-white">Obsidian Luxury</option>
+            <option value="emerald" class="bg-gray-900 text-white">Emerald Forest</option>
+            <option value="sunset" class="bg-gray-900 text-white">Sunset Glow</option>
+            <option value="nordic" class="bg-white text-slate-900">Nordic Light</option>
+          </select>
+        </div>
+
+        <!-- History/Favorites Toggle Button -->
+        <button id="historyToggleBtn" class="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-[var(--text-main)] transition-colors flex items-center gap-2 text-xs font-semibold" title="View Saved Prompts">
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <span class="hidden sm:inline">Saved</span>
+          <span id="savedCounter" class="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-400/20 text-amber-400">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <nav class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+      
+      <!-- Tool 1: AI Prompt Gen -->
+      <button onclick="switchTab('general')" id="tab-general" class="nav-btn active p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-indigo-500/30 bg-indigo-500/10 group-hover:scale-105 transition-transform">
+          <!-- Sparkles & Terminal Icon -->
+          <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] font-semibold">Studio 01</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">AI Prompt Builder</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Midjourney, Stable Diffusion & DALL-E styles</p>
+        </div>
+      </button>
+
+      <!-- Tool 2: Character Gen -->
+      <button onclick="switchTab('character')" id="tab-character" class="nav-btn p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-pink-500/30 bg-pink-500/10 group-hover:scale-105 transition-transform">
+          <!-- Character Face / Persona Icon -->
+          <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-pink-400 font-semibold">Studio 02</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">Character Forge</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Archetypes, costumes, expressions & poses</p>
+        </div>
+      </button>
+
+      <!-- Tool 3: Interior Design Gen -->
+      <button onclick="switchTab('interior')" id="tab-interior" class="nav-btn p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] flex items-center gap-4 text-left group">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-emerald-500/30 bg-emerald-500/10 group-hover:scale-105 transition-transform">
+          <!-- Interior Room / Architecture Icon -->
+          <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">Studio 03</span>
+          <h2 class="text-base font-bold text-[var(--text-main)]">Interior Spaces</h2>
+          <p class="text-xs text-[var(--text-muted)] line-clamp-1">Architectural lighting, materials & layout</p>
+        </div>
+      </button>
+
+    </nav>
+
+    <!-- MAIN TWO-COLUMN WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- ================= APP 1: GENERAL AI PROMPT BUILDER ================= -->
+        <div id="section-general" class="space-y-6">
+          <div class="theme-card p-6 rounded-3xl space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">1. Core Concept & Medium</h3>
+                <p class="text-xs text-[var(--text-muted)]">Type your vision or select predefined artistic medium tags.</p>
+              </div>
+              <button onclick="randomizeGeneral()" class="px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] text-xs font-semibold flex items-center gap-1.5 text-[var(--accent)] transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Surprise Me
+              </button>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wide">Main Subject / Idea</label>
+              <textarea id="gen-subject" rows="2" placeholder="e.g. A robotic geisha playing a holographic koto instrument under cherry blossoms" class="w-full p-3 rounded-2xl theme-input text-sm resize-none"></textarea>
+            </div>
+
+            <!-- Medium Chips -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wide">Artistic Medium</label>
+              <div class="flex flex-wrap gap-2" id="gen-medium-chips">
+                <!-- Dynamically or statically hydrated -->
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Digital Painting</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs active" onclick="toggleTag(this, 'general')">Photorealistic 35mm</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Cinematic Film Still</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Oil Painting on Canvas</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Unreal Engine 5 Render</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Cyberpunk Anime</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'general')">Claymation Macro</span>
+              </div>
+            </div>
+
+            <!-- Lighting & Mood -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Lighting Style</label>
+                <select id="gen-lighting" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Volumetric cinematic god rays">Volumetric God Rays</option>
+                  <option value="Golden hour natural warm sunlight">Golden Hour Sunlight</option>
+                  <option value="Moody neon cyberpunk backlight">Moody Neon Backlight</option>
+                  <option value="Soft studio diffuse bounce lighting">Soft Studio Diffuse</option>
+                  <option value="Chiaroscuro dramatic contrast shadows">Chiaroscuro Dramatic Shadows</option>
+                  <option value="Bioluminescent ethereal glow">Bioluminescent Glow</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Atmosphere / Mood</label>
+                <select id="gen-mood" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Ethereal, mystical, serene, evocative">Mystical & Ethereal</option>
+                  <option value="Epic, tense, dramatic and high stakes">Epic & Dramatic</option>
+                  <option value="Cozy, tranquil, warm and peaceful">Tranquil & Cozy</option>
+                  <option value="Cyber-noir, dystopian, melancholic">Dystopian Noir</option>
+                  <option value="Whimsical, vibrant, dreamlike wonderland">Vibrant & Whimsical</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Camera Perspective & Artist Tribute -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Camera Angle & Lens</label>
+                <select id="gen-camera" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Shot on 85mm f/1.4 lens, shallow depth of field">85mm Portrait (Bokeh)</option>
+                  <option value="Ultra-wide 16mm low-angle hero shot">16mm Ultra-Wide Dramatic</option>
+                  <option value="Macro extreme close-up lens, intricate focus">Macro Extreme Close-Up</option>
+                  <option value="Isometric bird-eye drone shot">Isometric Aerial View</option>
+                  <option value="Dutch angle tilted cinematic composition">Dutch Angle Tilted Shot</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Artist / Director Tribute</label>
+                <input id="gen-artist" type="text" oninput="buildPrompt()" placeholder="e.g. Makoto Shinkai, Denis Villeneuve, Greg Rutkowski" class="w-full p-2.5 rounded-xl theme-input text-xs">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= APP 2: CHARACTER FORGE ================= -->
+        <div id="section-character" class="space-y-6 hidden">
+          <div class="theme-card p-6 rounded-3xl space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">Character Conception & Anatomy</h3>
+                <p class="text-xs text-[var(--text-muted)]">Design bespoke portraits, full-body concepts, or hero artwork.</p>
+              </div>
+              <button onclick="randomizeCharacter()" class="px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-pink-500 text-xs font-semibold flex items-center gap-1.5 text-pink-400 transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Randomize Character
+              </button>
+            </div>
+
+            <!-- Archetype & Name/Bio -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Archetype / Role</label>
+                <select id="char-archetype" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Cybernetic bounty hunter mercenary">Cybernetic Bounty Hunter</option>
+                  <option value="Celestial elven high priestess">Celestial Elven Priestess</option>
+                  <option value="Steampunk aeronautical inventor">Steampunk Aeronautical Inventor</option>
+                  <option value="Urban streetwear samurai warrior">Urban Streetwear Samurai</option>
+                  <option value="Deep space astro-biologist explorer">Deep Space Astro-Biologist</option>
+                  <option value="Post-apocalyptic wanderer mechanic">Post-Apocalyptic Scavenger</option>
+                  <option value="Victorian dark occult investigator">Victorian Dark Occultist</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Gender / Age / Physique</label>
+                <input id="char-physique" type="text" oninput="buildPrompt()" value="athletic, mid 20s, sharp features, glowing bio-luminescent eyes" class="w-full p-2.5 rounded-xl theme-input text-xs">
+              </div>
+            </div>
+
+            <!-- Attire & Gear -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Costume, Garments & Accessories</label>
+              <textarea id="char-outfit" rows="2" oninput="buildPrompt()" class="w-full p-3 rounded-2xl theme-input text-sm resize-none" placeholder="e.g. Matte-black tactical Kevlar jacket, glowing cyan fiber-optic seams, brass goggles, flowing silk cape"></textarea>
+            </div>
+
+            <!-- Expression & Pose -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Expression & Emotion</label>
+                <select id="char-expression" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="confident slight smirk, intense piercing gaze">Confident Smirk & Piercing Gaze</option>
+                  <option value="serene calm smile, closed eyes in meditation">Serene & Meditative</option>
+                  <option value="fierce battle cry, adrenaline-fueled intensity">Fierce & Determined Intensity</option>
+                  <option value="mysterious brooding look with shadows crossing face">Mysterious Brooding Silhouette</option>
+                  <option value="melancholic contemplative distant stare">Melancholic Distant Stare</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Pose & Framing</label>
+                <select id="char-pose" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="dynamic three-quarter action portrait, ready for battle">3/4 Action Stance (Portrait)</option>
+                  <option value="full-body concept sheet turn-around, neutral pose">Full Body Character Concept Turn</option>
+                  <option value="cinematic close-up portrait focusing on face details">Close-up Hero Portrait</option>
+                  <option value="crouched on a rainy neon ledge, looking down at city">Crouched on City Ledge</option>
+                  <option value="floating weightlessly in zero gravity">Zero Gravity Weightless Pose</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Character Tags -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wide">Visual Aesthetic Chips</label>
+              <div class="flex flex-wrap gap-2" id="char-chips">
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs active" onclick="toggleTag(this, 'character')">Intricate Skin Pore Texture</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs active" onclick="toggleTag(this, 'character')">Octane Render 3D</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'character')">Subsurface Scattering</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'character')">Artstation Trending</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'character')">Retro Mecha Anime</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'character')">Gothic Dark Fantasy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= APP 3: INTERIOR DESIGN SPACES ================= -->
+        <div id="section-interior" class="space-y-6 hidden">
+          <div class="theme-card p-6 rounded-3xl space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <h3 class="text-lg font-bold">Architectural & Interior Design</h3>
+                <p class="text-xs text-[var(--text-muted)]">Configure room layouts, furniture curation, textures and windows.</p>
+              </div>
+              <button onclick="randomizeInterior()" class="px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-emerald-500 text-xs font-semibold flex items-center gap-1.5 text-emerald-400 transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                Randomize Interior
+              </button>
+            </div>
+
+            <!-- Room Type & Architectural Style -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Room Space</label>
+                <select id="int-room" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Open-concept penthouse living room with double-height ceiling">Penthouse Living Room</option>
+                  <option value="Minimalist master bedroom sanctuary with sunken platform bed">Minimalist Master Bedroom</option>
+                  <option value="State-of-the-art chef gourmet kitchen and marble breakfast island">Gourmet Kitchen & Island</option>
+                  <option value="Serene Japanese bathroom onsen with cedar soaking tub">Japanese Zen Onsen Bath</option>
+                  <option value="Futuristic executive home office library with curved glass desk">Futuristic Executive Office</option>
+                  <option value="Sunlit rooftop glass greenhouse garden lounge">Rooftop Glass Solarium</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Design Style</label>
+                <select id="int-style" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Japandi & Scandinavian minimal organic fusion">Japandi Organic Minimalist</option>
+                  <option value="Mid-Century Modern with warm walnut accents">Mid-Century Modern</option>
+                  <option value="Industrial loft with exposed raw brick and blackened steel">Industrial Raw Loft</option>
+                  <option value="Biophilic modern luxury with lush indoor living wall">Biophilic Living Wall</option>
+                  <option value="Contemporary Parisian Haussmann apartment with ornate moldings">Parisian Haussmannian</option>
+                  <option value="Futuristic cyberpunk penthouse with embedded mood LEDs">Futuristic Cyberpunk Luxury</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Materials & Lighting -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Materials & Textures</label>
+                <input id="int-materials" type="text" oninput="buildPrompt()" value="light oak wood, fluted travertine stone, brushed champagne brass, bouclé fabrics" class="w-full p-2.5 rounded-xl theme-input text-xs">
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Window View / External Ambience</label>
+                <select id="int-view" onchange="buildPrompt()" class="w-full p-2.5 rounded-xl theme-input text-xs">
+                  <option value="Floor-to-ceiling glass panoramic windows overlooking Tokyo skyline at dusk">Tokyo Skyline at Dusk</option>
+                  <option value="Large arched windows overlooking a rainy pine forest and misty mountains">Misty Pine Forest & Mountains</option>
+                  <option value="Sliding glass doors opening to Mediterranean ocean waves and sunny balcony">Mediterranean Sea Horizon</option>
+                  <option value="Skylight ceiling peering into a starry cosmic night sky">Glass Ceiling Sky View</option>
+                  <option value="Private tranquil zen rock courtyard garden with bamboo">Private Bamboo Zen Courtyard</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Key Feature Furniture Focus -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Furniture Highlights & Decor</label>
+              <textarea id="int-furniture" rows="2" oninput="buildPrompt()" class="w-full p-3 rounded-2xl theme-input text-sm resize-none" placeholder="e.g. Curved cream bouclé sectional sofa, low travertine cocktail coffee table, sculptured ceramic vases, architectural floor lamp"></textarea>
+            </div>
+
+            <!-- Interior Chips -->
+            <div>
+              <label class="block text-xs font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wide">Editorial Photography Specs</label>
+              <div class="flex flex-wrap gap-2" id="int-chips">
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs active" onclick="toggleTag(this, 'interior')">Architectural Digest Photo</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs active" onclick="toggleTag(this, 'interior')">Natural Diffused Daylight</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'interior')">Hasselblad H6D-100c</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'interior')">Wide Angle 24mm Tilt-Shift</span>
+                <span class="tag-chip px-3 py-1 rounded-xl text-xs" onclick="toggleTag(this, 'interior')">Warm Recessed Cove Lighting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SHARED ENGINE & PARAMETER SETTINGS (For Midjourney / SD / DALL-E) -->
+        <div class="theme-card p-6 rounded-3xl space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-[var(--border-color)]">
+            <h4 class="text-sm font-bold flex items-center gap-2">
+              <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+              AI Engine Tuning & Parameters
+            </h4>
+            <span class="text-[11px] font-mono text-[var(--text-muted)]">Midjourney v6.1 & SDXL Ready</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-[var(--text-muted)] mb-1">Aspect Ratio (--ar)</label>
+              <select id="param-ar" onchange="buildPrompt()" class="w-full p-2 rounded-xl theme-input text-xs font-mono">
+                <option value="--ar 16:9">16:9 (Cinematic)</option>
+                <option value="--ar 9:16">9:16 (Story/Phone)</option>
+                <option value="--ar 4:5">4:5 (Instagram)</option>
+                <option value="--ar 1:1">1:1 (Square)</option>
+                <option value="--ar 21:9">21:9 (Ultrawide)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-[var(--text-muted)] mb-1">Engine Version</label>
+              <select id="param-ver" onchange="buildPrompt()" class="w-full p-2 rounded-xl theme-input text-xs font-mono">
+                <option value="--v 6.1">--v 6.1</option>
+                <option value="--v 6.0">--v 6.0</option>
+                <option value="--v 5.2">--v 5.2</option>
+                <option value="--niji 6">--niji 6 (Anime)</option>
+                <option value="sdxl">SDXL Direct</option>
+              </select>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-[11px] font-semibold text-[var(--text-muted)]">Stylize (--s)</label>
+                <span id="label-stylize" class="text-[10px] font-mono text-[var(--accent)]">250</span>
+              </div>
+              <input id="slider-stylize" type="range" min="0" max="1000" step="50" value="250" oninput="updateSliders(); buildPrompt()" class="w-full accent-[var(--accent)] cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-[11px] font-semibold text-[var(--text-muted)]">Chaos / Var</label>
+                <span id="label-chaos" class="text-[10px] font-mono text-[var(--accent)]">15</span>
+              </div>
+              <input id="slider-chaos" type="range" min="0" max="100" step="5" value="15" oninput="updateSliders(); buildPrompt()" class="w-full accent-[var(--accent)] cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Negative Prompt Accordion -->
+          <div class="pt-2">
+            <div class="flex items-center justify-between cursor-pointer" onclick="toggleNegativeBox()">
+              <span class="text-xs font-medium text-[var(--text-muted)] flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                Negative Prompt / Exclusions (--no)
+              </span>
+              <span id="negChevron" class="text-xs text-[var(--text-muted)] font-mono transition-transform duration-200">▼</span>
+            </div>
+            <div id="negativeBox" class="mt-2 hidden">
+              <input id="neg-input" type="text" oninput="buildPrompt()" value="blurry, distorted anatomy, extra limbs, bad hands, low resolution, overexposed, watermark, signature" class="w-full p-2.5 rounded-xl theme-input text-xs font-mono text-rose-300">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
+        
+        <!-- Live Result Card -->
+        <div class="theme-card p-6 rounded-3xl space-y-5 border-2 border-[var(--accent-glow)] shadow-2xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 rounded-full bg-[var(--accent-glow)] filter blur-3xl pointer-events-none"></div>
+
+          <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <h3 class="text-base font-bold">Synthesized Prompt</h3>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="bookmarkCurrentPrompt()" class="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:text-amber-400 transition-colors" title="Bookmark / Save Prompt">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/></svg>
+              </button>
+              <button onclick="copyGeneratedPrompt()" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-lg transition-transform active:scale-95 flex items-center gap-2" style="background: var(--accent-gradient);">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+
+          <!-- Prompt Result Box -->
+          <div class="relative">
+            <div id="fullPromptOutput" class="w-full min-h-[160px] p-4 rounded-2xl theme-input font-mono text-xs leading-relaxed break-words border border-[var(--border-color)] select-all">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Stats / Info Badge -->
+          <div class="grid grid-cols-3 gap-2 text-center pt-1 font-mono text-[11px]">
+            <div class="p-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+              <div class="text-[var(--text-muted)] text-[10px] uppercase">Words</div>
+              <div id="stat-words" class="font-bold text-[var(--accent)] text-sm">0</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+              <div class="text-[var(--text-muted)] text-[10px] uppercase">Characters</div>
+              <div id="stat-chars" class="font-bold text-[var(--accent)] text-sm">0</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+              <div class="text-[var(--text-muted)] text-[10px] uppercase">Est. Tokens</div>
+              <div id="stat-tokens" class="font-bold text-[var(--accent)] text-sm">0</div>
+            </div>
+          </div>
+
+          <!-- Quick Action Copy Variants -->
+          <div class="pt-2 border-t border-[var(--border-color)] space-y-2">
+            <div class="text-[11px] font-semibold text-[var(--text-muted)]">Target Export Formats:</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="copyRawSubject()" class="p-2 rounded-xl text-left border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] transition-all">
+                <div class="text-[10px] font-bold text-[var(--text-main)]">Subject Only</div>
+                <div class="text-[9px] text-[var(--text-muted)] truncate">Copy core description</div>
+              </button>
+              <button onclick="copyMidjourneyCommand()" class="p-2 rounded-xl text-left border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] transition-all">
+                <div class="text-[10px] font-bold text-[var(--text-main)]">/imagine Discord</div>
+                <div class="text-[9px] text-[var(--text-muted)] truncate">Prepended with command</div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- History Drawer / Bookmark list -->
+        <div id="historyDrawer" class="theme-card p-6 rounded-3xl space-y-4">
+          <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+            <h4 class="text-sm font-bold flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              Saved Presets & History
+            </h4>
+            <button onclick="clearHistory()" class="text-[10px] text-rose-400 hover:underline">Clear All</button>
+          </div>
+          <div id="savedListContainer" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+            <div class="text-xs text-[var(--text-muted)] italic text-center py-4">No saved prompts yet. Click the bookmark icon to store your best creations!</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification Message -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="px-5 py-3 rounded-2xl bg-gray-900 border border-emerald-500/40 text-emerald-300 shadow-2xl flex items-center gap-3 text-xs font-semibold backdrop-blur-lg">
+      <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      <span id="toastMessage">Copied prompt to clipboard!</span>
+    </div>
+  </div>
+
+  <script>
+    /* ================= APP STATE & CURATED PRESETS ================= */
+    let currentApp = 'general';
+    let savedPrompts = [];
+
+    const PRESETS_GENERAL = [
+      {
+        subject: "An ancient floating biome island with bioluminescent waterfalls cascading into the cosmos, overgrown sakura trees and mythical ruins",
+        medium: ["Photorealistic 35mm", "Unreal Engine 5 Render"],
+        lighting: "Bioluminescent ethereal glow",
+        mood: "Ethereal, mystical, serene, evocative",
+        camera: "Ultra-wide 16mm low-angle hero shot",
+        artist: "Studio Ghibli, Roger Dean, Albert Bierstadt"
+      },
+      {
+        subject: "A sleek cybernetic samurai with polished chrome katana sitting on the hood of a retro-futuristic vehicle in rain",
+        medium: ["Cinematic Film Still", "Cyberpunk Anime"],
+        lighting: "Moody neon cyberpunk backlight",
+        mood: "Cyber-noir, dystopian, melancholic",
+        camera: "Shot on 85mm f/1.4 lens, shallow depth of field",
+        artist: "Syd Mead, Ridley Scott, Katsuhiro Otomo"
+      },
+      {
+        subject: "A majestic celestial dragon woven from stardust and aurora borealis swirling over ancient Himalayan mountain peaks",
+        medium: ["Digital Painting"],
+        lighting: "Volumetric cinematic god rays",
+        mood: "Epic, tense, dramatic and high stakes",
+        camera: "Isometric bird-eye drone shot",
+        artist: "Greg Rutkowski, Frank Frazetta"
+      }
+    ];
+
+    const PRESETS_CHARACTERS = [
+      {
+        archetype: "Cybernetic bounty hunter mercenary",
+        physique: "tall, muscular frame, cybernetic ocular implant, shaved temple with barcode tattoo",
+        outfit: "Distressed ballistic leather duster with glowing orange thermal coils, modular ammo chest rig, heavy combat boots",
+        expression: "confident slight smirk, intense piercing gaze",
+        pose: "dynamic three-quarter action portrait, ready for battle",
+        chips: ["Intricate Skin Pore Texture", "Octane Render 3D", "Artstation Trending"]
+      },
+      {
+        archetype: "Celestial elven high priestess",
+        physique: "ethereal tall silhouette, silver moonlit hair reaching floor, pearlescent skin, iridescent violet eyes",
+        outfit: "Gown woven of starlight gossamer silk, floating filigree gold crown, lunar gemstone collar",
+        expression: "serene calm smile, closed eyes in meditation",
+        pose: "cinematic close-up portrait focusing on face details",
+        chips: ["Subsurface Scattering", "Octane Render 3D"]
+      },
+      {
+        archetype: "Steampunk aeronautical inventor",
+        physique: "weathered features, soot on cheekbones, intense inventive focus, copper monocle",
+        outfit: "Tweed vest over rolled-up linen shirt, leather arm braces with brass pressure dials, tool bandolier",
+        expression: "confident slight smirk, intense piercing gaze",
+        pose: "crouched on a rainy neon ledge, looking down at city",
+        chips: ["Intricate Skin Pore Texture", "Octane Render 3D"]
+      }
+    ];
+
+    const PRESETS_INTERIOR = [
+      {
+        room: "Open-concept penthouse living room with double-height ceiling",
+        style: "Japandi & Scandinavian minimal organic fusion",
+        materials: "light Scandinavian white oak slats, fluted honed travertine, textured bouclé wool, matte black hardware",
+        view: "Floor-to-ceiling glass panoramic windows overlooking Tokyo skyline at dusk",
+        furniture: "Curved kidney sofa in cream fabric, sculptural low coffee table, Noguchi paper floor lamp, minimalist Bonsai pedestal",
+        chips: ["Architectural Digest Photo", "Natural Diffused Daylight", "Wide Angle 24mm Tilt-Shift"]
+      },
+      {
+        room: "Serene Japanese bathroom onsen with cedar soaking tub",
+        style: "Biophilic modern luxury with lush indoor living wall",
+        materials: "charred Shou Sugi Ban timber, river pebble stone floor, Hinoki wood aroma, smoky tinted glass",
+        view: "Private tranquil zen rock courtyard garden with bamboo",
+        furniture: "Freestanding oval hinoki tub, rainfall ceiling showerhead, slate vanity with floating basin, steam atmosphere",
+        chips: ["Architectural Digest Photo", "Warm Recessed Cove Lighting"]
+      },
+      {
+        room: "Futuristic executive home office library with curved glass desk",
+        style: "Futuristic cyberpunk penthouse with embedded mood LEDs",
+        materials: "anodized dark titanium, carbon fiber shelving, smoked glass panels, cognac Italian leather",
+        view: "Floor-to-ceiling glass panoramic windows overlooking Tokyo skyline at dusk",
+        furniture: "Cantilevered ergonomic zero-gravity chair, holographic interactive display desk, floor-to-ceiling curved illuminated bookshelves",
+        chips: ["Architectural Digest Photo", "Warm Recessed Cove Lighting", "Hasselblad H6D-100c"]
+      }
+    ];
+
+    function switchTab(appId) {
+      currentApp = appId;
+      
+      // Update Navigation Buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('tab-' + appId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update Section Visibility
+      document.getElementById('section-general').classList.add('hidden');
+      document.getElementById('section-character').classList.add('hidden');
+      document.getElementById('section-interior').classList.add('hidden');
+      
+      document.getElementById('section-' + appId).classList.remove('hidden');
+
+      // Re-synthesize prompt based on newly selected tool
+      buildPrompt();
+    }
+
+    /* Tag Chip Toggling */
+    function toggleTag(el, toolContext) {
+      el.classList.toggle('active');
+      buildPrompt();
+    }
+
+    /* Slider updates */
+    function updateSliders() {
+      const stylizeVal = document.getElementById('slider-stylize').value;
+      const chaosVal = document.getElementById('slider-chaos').value;
+      document.getElementById('label-stylize').innerText = stylizeVal;
+      document.getElementById('label-chaos').innerText = chaosVal;
+    }
+
+    /* Toggle Negative Prompt Panel */
+    function toggleNegativeBox() {
+      const box = document.getElementById('negativeBox');
+      const chev = document.getElementById('negChevron');
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        chev.style.transform = 'rotate(180deg)';
+      } else {
+        box.classList.add('hidden');
+        chev.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function buildPrompt() {
+      let promptParts = [];
+      const ar = document.getElementById('param-ar').value;
+      const ver = document.getElementById('param-ver').value;
+      const stylize = document.getElementById('slider-stylize').value;
+      const chaos = document.getElementById('slider-chaos').value;
+      const negInput = document.getElementById('neg-input').value.trim();
+
+      if (currentApp === 'general') {
+        const subject = document.getElementById('gen-subject').value.trim();
+        if (subject) promptParts.push(subject);
+
+        // Medium active tags
+        const activeMediums = [];
+        document.querySelectorAll('#gen-medium-chips .tag-chip.active').forEach(chip => {
+          activeMediums.push(chip.innerText);
+        });
+        if (activeMediums.length) promptParts.push(activeMediums.join(', '));
+
+        const lighting = document.getElementById('gen-lighting').value;
+        if (lighting) promptParts.push(lighting);
+
+        const mood = document.getElementById('gen-mood').value;
+        if (mood) promptParts.push(mood);
+
+        const camera = document.getElementById('gen-camera').value;
+        if (camera) promptParts.push(camera);
+
+        const artist = document.getElementById('gen-artist').value.trim();
+        if (artist) promptParts.push("style tribute by " + artist);
+
+      } else if (currentApp === 'character') {
+        const archetype = document.getElementById('char-archetype').value;
+        const physique = document.getElementById('char-physique').value.trim();
+        const outfit = document.getElementById('char-outfit').value.trim();
+        const expression = document.getElementById('char-expression').value;
+        const pose = document.getElementById('char-pose').value;
+
+        let charCore = archetype;
+        if (physique) charCore += ", " + physique;
+        promptParts.push(charCore);
+
+        if (outfit) promptParts.push("wearing " + outfit);
+        promptParts.push(expression);
+        promptParts.push(pose);
+
+        // Character active tags
+        const activeCharChips = [];
+        document.querySelectorAll('#char-chips .tag-chip.active').forEach(chip => {
+          activeCharChips.push(chip.innerText);
+        });
+        if (activeCharChips.length) promptParts.push(activeCharChips.join(', '));
+
+      } else if (currentApp === 'interior') {
+        const room = document.getElementById('int-room').value;
+        const style = document.getElementById('int-style').value;
+        const materials = document.getElementById('int-materials').value.trim();
+        const view = document.getElementById('int-view').value;
+        const furniture = document.getElementById('int-furniture').value.trim();
+
+        promptParts.push(room);
+        promptParts.push("designed in " + style + " style");
+        if (materials) promptParts.push("featuring materials: " + materials);
+        if (furniture) promptParts.push("interior decor featuring " + furniture);
+        promptParts.push("view looking out toward: " + view);
+
+        // Interior active tags
+        const activeIntChips = [];
+        document.querySelectorAll('#int-chips .tag-chip.active').forEach(chip => {
+          activeIntChips.push(chip.innerText);
+        });
+        if (activeIntChips.length) promptParts.push(activeIntChips.join(', '));
+      }
+
+      // Add Midjourney parameters
+      let fullString = promptParts.filter(Boolean).join(', ');
+
+      if (ver !== 'sdxl') {
+        fullString += ` ${ar} ${ver} --s ${stylize} --c ${chaos}`;
+        if (negInput) {
+          fullString += ` --no ${negInput}`;
+        }
+      } else {
+        // SDXL phrasing
+        fullString += `, highly detailed, 8k resolution`;
+        if (negInput) {
+          fullString += ` | Negative prompt: ${negInput}`;
+        }
+      }
+
+      // Render to UI
+      const outputElem = document.getElementById('fullPromptOutput');
+      outputElem.innerText = fullString || "Select attributes or type your prompt vision above...";
+
+      // Word / Token counters
+      const words = fullString ? fullString.trim().split(/\s+/).length : 0;
+      const chars = fullString ? fullString.length : 0;
+      const estTokens = Math.ceil(chars / 4);
+
+      document.getElementById('stat-words').innerText = words;
+      document.getElementById('stat-chars').innerText = chars;
+      document.getElementById('stat-tokens').innerText = estTokens;
+    }
+
+    function randomizeGeneral() {
+      const item = PRESETS_GENERAL[Math.floor(Math.random() * PRESETS_GENERAL.length)];
+      document.getElementById('gen-subject').value = item.subject;
+      document.getElementById('gen-lighting').value = item.lighting;
+      document.getElementById('gen-mood').value = item.mood;
+      document.getElementById('gen-camera').value = item.camera;
+      document.getElementById('gen-artist').value = item.artist;
+
+      // toggle chips
+      document.querySelectorAll('#gen-medium-chips .tag-chip').forEach(chip => {
+        if (item.medium.includes(chip.innerText)) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+
+      buildPrompt();
+      showToast("Generated creative prompt concept!");
+    }
+
+    function randomizeCharacter() {
+      const item = PRESETS_CHARACTERS[Math.floor(Math.random() * PRESETS_CHARACTERS.length)];
+      document.getElementById('char-archetype').value = item.archetype;
+      document.getElementById('char-physique').value = item.physique;
+      document.getElementById('char-outfit').value = item.outfit;
+      document.getElementById('char-expression').value = item.expression;
+      document.getElementById('char-pose').value = item.pose;
+
+      document.querySelectorAll('#char-chips .tag-chip').forEach(chip => {
+        if (item.chips.includes(chip.innerText)) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+
+      buildPrompt();
+      showToast("Forged new randomized character persona!");
+    }
+
+    function randomizeInterior() {
+      const item = PRESETS_INTERIOR[Math.floor(Math.random() * PRESETS_INTERIOR.length)];
+      document.getElementById('int-room').value = item.room;
+      document.getElementById('int-style').value = item.style;
+      document.getElementById('int-materials').value = item.materials;
+      document.getElementById('int-view').value = item.view;
+      document.getElementById('int-furniture').value = item.furniture;
+
+      document.querySelectorAll('#int-chips .tag-chip').forEach(chip => {
+        if (item.chips.includes(chip.innerText)) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+
+      buildPrompt();
+      showToast("Generated new architectural spatial concept!");
+    }
+
+    function safeCopyText(textToCopy) {
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = textToCopy;
+      tempTextArea.style.position = "fixed";
+      tempTextArea.style.left = "-9999px";
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("Copied to clipboard!");
+      } catch (err) {
+        showToast("Failed to copy text.");
+      }
+      document.body.removeChild(tempTextArea);
+    }
+
+    function copyGeneratedPrompt() {
+      const text = document.getElementById('fullPromptOutput').innerText;
+      safeCopyText(text);
+    }
+
+    function copyRawSubject() {
+      let raw = "";
+      if (currentApp === 'general') raw = document.getElementById('gen-subject').value;
+      if (currentApp === 'character') raw = document.getElementById('char-archetype').value + ", " + document.getElementById('char-physique').value;
+      if (currentApp === 'interior') raw = document.getElementById('int-room').value;
+      safeCopyText(raw || document.getElementById('fullPromptOutput').innerText);
+    }
+
+    function copyMidjourneyCommand() {
+      const text = document.getElementById('fullPromptOutput').innerText;
+      safeCopyText("/imagine prompt: " + text);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMessage');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2500);
+    }
+
+    function bookmarkCurrentPrompt() {
+      const text = document.getElementById('fullPromptOutput').innerText;
+      if (!text || text.includes("Select attributes")) return;
+
+      const appLabels = {
+        general: "AI Prompt",
+        character: "Character",
+        interior: "Interior"
+      };
+
+      const bookmarkItem = {
+        id: Date.now(),
+        type: appLabels[currentApp],
+        text: text,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      savedPrompts.unshift(bookmarkItem);
+      renderSavedList();
+      showToast("Saved prompt to collection!");
+    }
+
+    function renderSavedList() {
+      const container = document.getElementById('savedListContainer');
+      const counter = document.getElementById('savedCounter');
+      counter.innerText = savedPrompts.length;
+
+      if (savedPrompts.length === 0) {
+        container.innerHTML = `<div class="text-xs text-[var(--text-muted)] italic text-center py-4">No saved prompts yet. Click the bookmark icon to store your best creations!</div>`;
+        return;
+      }
+
+      container.innerHTML = savedPrompts.map(item => `
+        <div class="p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] flex items-start justify-between gap-3 text-xs group hover:border-[var(--accent)] transition-all">
+          <div class="space-y-1 flex-1 min-w-0 cursor-pointer" onclick="safeCopyText('${escapeJsString(item.text)}')">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[var(--badge-bg)] text-[var(--accent)] border border-[var(--badge-border)]">${item.type}</span>
+              <span class="text-[10px] text-[var(--text-muted)] font-mono">${item.timestamp}</span>
+            </div>
+            <p class="font-mono text-[11px] text-[var(--text-main)] truncate">${item.text}</p>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button onclick="safeCopyText('${escapeJsString(item.text)}')" class="p-1 rounded text-[var(--text-muted)] hover:text-white" title="Copy">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </button>
+            <button onclick="removeBookmark(${item.id})" class="p-1 rounded text-[var(--text-muted)] hover:text-rose-400" title="Delete">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeBookmark(id) {
+      savedPrompts = savedPrompts.filter(item => item.id !== id);
+      renderSavedList();
+    }
+
+    function clearHistory() {
+      savedPrompts = [];
+      renderSavedList();
+      showToast("Cleared saved prompt history.");
+    }
+
+    function escapeJsString(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    document.getElementById('themeSelect').addEventListener('change', (e) => {
+      const theme = e.target.value;
+      if (theme === 'default') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      showToast("Applied " + e.target.options[e.target.selectedIndex].text + " theme!");
+    });
+
+    // Window initialization
+    window.onload = function() {
+      // Set initial defaults
+      document.getElementById('gen-subject').value = "A hyper-detailed cybernetic geisha with delicate porcelain skin and glowing golden fiber optic kanzashi hair pins";
+      document.getElementById('char-outfit').value = "Matte-black ballistic jacket with neon turquoise trim, utility harnesses, mirrored tactical visor";
+      document.getElementById('int-furniture').value = "Low-profile walnut credenza, curved bouclé cream sofa, fluted marble coffee table, Noguchi paper sculpture lamp";
+
+      buildPrompt();
+    };
+  </script>
+</body>
+</html>
