@@ -249,10 +249,11 @@
   </div>
 <!-- ==========================================
      FEATURED APP BANNER: CharacterPromptGen
+     Palette: Vanilla Ice Cream & Sage / Mint
      Spans full 3-column width in a standard grid
      ========================================== -->
 <article class="featured-app-card">
-  <!-- Glowing subtle backdrop / decorative glow -->
+  <!-- Soft Mint / Sage ambient decorative glow -->
   <div class="featured-glow-overlay" aria-hidden="true"></div>
 
   <div class="featured-card-content">
@@ -260,7 +261,7 @@
     <div class="featured-info">
       <div class="featured-badge-group">
         <span class="badge badge-launch">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
           This Month's Special Launch
@@ -270,7 +271,7 @@
 
       <div class="featured-brand">
         <div class="featured-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             <path d="M12 7v6"></path>
             <path d="M9 10h6"></path>
@@ -289,7 +290,7 @@
       <div class="featured-actions">
         <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           Launch App
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="7" y1="17" x2="17" y2="7"></line>
             <polyline points="7 7 17 7 17 17"></polyline>
           </svg>
@@ -300,54 +301,54 @@
 
     <!-- Right / Visual Feature Highlight -->
     <div class="featured-preview">
-      <div class="preview-bubble preview-bubble-1">
+      <div class="preview-bubble">
         <span class="bubble-tag">Personality Archetype</span>
         <p>"A rogue archivist haunted by sentient parchment, bound to truth."</p>
       </div>
-      <div class="preview-bubble preview-bubble-2">
+      <div class="preview-bubble">
         <span class="bubble-tag">Visual Descriptor</span>
-        <p>"Steampunk aesthetic, iridescent copper accents, nocturnal traveler."</p>
+        <p>"Eucalyptus-dyed linen, etched brass compass, quiet woodland traveler."</p>
       </div>
     </div>
   </div>
 </article>
 
 <style>
-  /* Base card configuration: spans all 3 columns */
+  /* Base card: vanilla cream background with soft sage border */
   .featured-app-card {
     grid-column: 1 / -1; /* Spans full width of 3-column parent grid */
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #181413 0%, #241d1a 50%, #1e1715 100%);
-    border: 1px solid rgba(224, 169, 109, 0.28);
+    background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ea 60%, #f2eae0 100%);
+    border: 1.5px solid #d2ded5;
     border-radius: 20px;
     padding: 32px 36px;
-    color: #f7f3f0;
-    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    color: #2e3532;
+    box-shadow: 0 14px 34px -8px rgba(78, 93, 86, 0.1), 0 1px 3px rgba(0, 0, 0, 0.04);
     margin-bottom: 24px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
   .featured-app-card:hover {
-    border-color: rgba(224, 169, 109, 0.6);
-    box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(224, 169, 109, 0.12);
+    border-color: #8fa89b;
+    box-shadow: 0 20px 40px -10px rgba(62, 85, 75, 0.16), 0 0 20px rgba(188, 222, 206, 0.35);
   }
 
-  /* Soft warm ambient light accent matching Espresso Hub aesthetics */
+  /* Soft sage & mint atmospheric glow */
   .featured-glow-overlay {
     position: absolute;
-    top: -60px;
+    top: -80px;
     right: -60px;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(224, 169, 109, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(188, 226, 211, 0.5) 0%, rgba(220, 238, 230, 0.15) 50%, rgba(253, 251, 247, 0) 75%);
     pointer-events: none;
   }
 
   .featured-card-content {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1.45fr 1fr;
     gap: 36px;
     align-items: center;
     position: relative;
@@ -366,7 +367,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -374,15 +375,17 @@
     border-radius: 999px;
   }
 
+  /* Sage highlight badge */
   .badge-launch {
-    background: rgba(224, 169, 109, 0.18);
-    color: #f5c490;
-    border: 1px solid rgba(224, 169, 109, 0.35);
+    background: #e4efe7;
+    color: #3b5f4c;
+    border: 1px solid #c2dbcb;
   }
 
   .badge-category {
-    background: rgba(255, 255, 255, 0.08);
-    color: #d1c8c1;
+    background: #ede7dc;
+    color: #685e54;
+    border: 1px solid #dfd7ca;
   }
 
   /* Identity / App Header */
@@ -393,16 +396,17 @@
     margin-bottom: 14px;
   }
 
+  /* Icon tile: Sage into deep mint */
   .featured-icon {
-    width: 58px;
-    height: 58px;
-    background: linear-gradient(135deg, #c77d46 0%, #7d4427 100%);
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #7da592 0%, #4e7762 100%);
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    box-shadow: 0 8px 18px rgba(199, 125, 70, 0.3);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(78, 119, 98, 0.25);
     flex-shrink: 0;
   }
 
@@ -410,25 +414,26 @@
     font-size: 1.65rem;
     font-weight: 800;
     margin: 0;
-    color: #ffffff;
+    color: #1e2522;
     line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   .featured-domain {
     font-size: 0.85rem;
-    color: #9e9188;
-    font-family: monospace;
+    color: #6d7b73;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
   .featured-description {
     font-size: 0.95rem;
-    color: #c9bfb8;
+    color: #4f5854;
     line-height: 1.6;
     margin: 0 0 22px 0;
     max-width: 620px;
   }
 
-  /* CTA & Footer */
+  /* Actions */
   .featured-actions {
     display: flex;
     align-items: center;
@@ -440,67 +445,71 @@
     align-items: center;
     gap: 8px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     text-decoration: none;
-    padding: 11px 22px;
+    padding: 10px 22px;
     border-radius: 10px;
     transition: all 0.2s ease;
   }
 
+  /* Mint/Sage primary button */
   .btn-primary {
-    background: #e0a96d;
-    color: #1a120c;
+    background: #466e5a;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(70, 110, 90, 0.25);
   }
 
   .btn-primary:hover {
-    background: #ebba83;
+    background: #395c4a;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(224, 169, 109, 0.35);
+    box-shadow: 0 6px 18px rgba(70, 110, 90, 0.35);
   }
 
   .featured-tagline {
-    font-size: 0.85rem;
-    color: #8c8077;
+    font-size: 0.84rem;
+    color: #857e74;
+    font-weight: 500;
   }
 
   /* Interactive visual highlight cards */
   .featured-preview {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .preview-bubble {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px 18px;
-    backdrop-filter: blur(8px);
+    background: #ffffff;
+    border: 1px solid #e1ded7;
+    border-left: 4px solid #7da592; /* mint/sage accent stripe */
+    border-radius: 10px;
+    padding: 13px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
 
   .bubble-tag {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    color: #e0a96d;
+    color: #4a725e;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     margin-bottom: 4px;
   }
 
   .preview-bubble p {
     margin: 0;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-style: italic;
-    color: #e4ded9;
+    color: #38423d;
     line-height: 1.45;
   }
 
-  /* Responsive breakdown for tablet and mobile screens */
+  /* Responsive breakdown */
   @media (max-width: 860px) {
     .featured-card-content {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 22px;
     }
 
     .featured-app-card {
@@ -508,7 +517,7 @@
     }
 
     .featured-preview {
-      display: none; /* Keeps it neat and compact on smaller viewports */
+      display: none;
     }
   }
 </style>
