@@ -247,7 +247,271 @@
     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
     <span id="toastMessage">Link copied to clipboard!</span>
   </div>
+<!-- ==========================================
+     FEATURED APP BANNER: CharacterPromptGen
+     Spans full 3-column width in a standard grid
+     ========================================== -->
+<article class="featured-app-card">
+  <!-- Glowing subtle backdrop / decorative glow -->
+  <div class="featured-glow-overlay" aria-hidden="true"></div>
 
+  <div class="featured-card-content">
+    <!-- Left / Top Info Column -->
+    <div class="featured-info">
+      <div class="featured-badge-group">
+        <span class="badge badge-launch">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          This Month's Special Launch
+        </span>
+        <span class="badge badge-category">AI & Creative Writing</span>
+      </div>
+
+      <div class="featured-brand">
+        <div class="featured-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <path d="M12 7v6"></path>
+            <path d="M9 10h6"></path>
+          </svg>
+        </div>
+        <div>
+          <h2 class="featured-title">CharacterPromptGen</h2>
+          <span class="featured-domain">characterpromptgen.app</span>
+        </div>
+      </div>
+
+      <p class="featured-description">
+        Craft deep, multifaceted characters and rich fictional personas in seconds. Designed for authors, screenwriters, RPG game masters, and digital artists looking for evocative creative prompts and tailored backstory generation.
+      </p>
+
+      <div class="featured-actions">
+        <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Launch App
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+        <span class="featured-tagline">Curated on EspressoHub</span>
+      </div>
+    </div>
+
+    <!-- Right / Visual Feature Highlight -->
+    <div class="featured-preview">
+      <div class="preview-bubble preview-bubble-1">
+        <span class="bubble-tag">Personality Archetype</span>
+        <p>"A rogue archivist haunted by sentient parchment, bound to truth."</p>
+      </div>
+      <div class="preview-bubble preview-bubble-2">
+        <span class="bubble-tag">Visual Descriptor</span>
+        <p>"Steampunk aesthetic, iridescent copper accents, nocturnal traveler."</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  /* Base card configuration: spans all 3 columns */
+  .featured-app-card {
+    grid-column: 1 / -1; /* Spans full width of 3-column parent grid */
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #181413 0%, #241d1a 50%, #1e1715 100%);
+    border: 1px solid rgba(224, 169, 109, 0.28);
+    border-radius: 20px;
+    padding: 32px 36px;
+    color: #f7f3f0;
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    margin-bottom: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .featured-app-card:hover {
+    border-color: rgba(224, 169, 109, 0.6);
+    box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(224, 169, 109, 0.12);
+  }
+
+  /* Soft warm ambient light accent matching Espresso Hub aesthetics */
+  .featured-glow-overlay {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(224, 169, 109, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+  }
+
+  .featured-card-content {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Badges */
+  .featured-badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  .badge-launch {
+    background: rgba(224, 169, 109, 0.18);
+    color: #f5c490;
+    border: 1px solid rgba(224, 169, 109, 0.35);
+  }
+
+  .badge-category {
+    background: rgba(255, 255, 255, 0.08);
+    color: #d1c8c1;
+  }
+
+  /* Identity / App Header */
+  .featured-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .featured-icon {
+    width: 58px;
+    height: 58px;
+    background: linear-gradient(135deg, #c77d46 0%, #7d4427 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(199, 125, 70, 0.3);
+    flex-shrink: 0;
+  }
+
+  .featured-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .featured-domain {
+    font-size: 0.85rem;
+    color: #9e9188;
+    font-family: monospace;
+  }
+
+  .featured-description {
+    font-size: 0.95rem;
+    color: #c9bfb8;
+    line-height: 1.6;
+    margin: 0 0 22px 0;
+    max-width: 620px;
+  }
+
+  /* CTA & Footer */
+  .featured-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 11px 22px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: #e0a96d;
+    color: #1a120c;
+  }
+
+  .btn-primary:hover {
+    background: #ebba83;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(224, 169, 109, 0.35);
+  }
+
+  .featured-tagline {
+    font-size: 0.85rem;
+    color: #8c8077;
+  }
+
+  /* Interactive visual highlight cards */
+  .featured-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .preview-bubble {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    backdrop-filter: blur(8px);
+  }
+
+  .bubble-tag {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #e0a96d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .preview-bubble p {
+    margin: 0;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: #e4ded9;
+    line-height: 1.45;
+  }
+
+  /* Responsive breakdown for tablet and mobile screens */
+  @media (max-width: 860px) {
+    .featured-card-content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .featured-app-card {
+      padding: 24px;
+    }
+
+    .featured-preview {
+      display: none; /* Keeps it neat and compact on smaller viewports */
+    }
+  }
+</style>
   <script>
     // Full project database containing the provided URLs
     const projects = [
