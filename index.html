@@ -37,7 +37,6 @@
     }
   </script>
   <style>
-    /* Custom subtle scrollbar and glass accents */
     ::-webkit-scrollbar {
       width: 7px;
       height: 7px;
@@ -59,10 +58,74 @@
         radial-gradient(at 100% 0%, rgba(254, 240, 138, 0.3) 0px, transparent 40%),
         radial-gradient(at 50% 100%, rgba(224, 231, 255, 0.4) 0px, transparent 50%);
     }
+    .contact-dev-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+      background-color: #0f172a;
+      border: 1px solid #0f172a;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .contact-dev-btn:hover {
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+    /* Featured App Card styling */
+    .featured-app-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ea 60%, #f2eae0 100%);
+      border: 1.5px solid #d2ded5;
+      border-radius: 20px;
+      padding: 32px 36px;
+      color: #2e3532;
+      box-shadow: 0 14px 34px -8px rgba(78, 93, 86, 0.1), 0 1px 3px rgba(0, 0, 0, 0.04);
+      margin-bottom: 28px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .featured-app-card:hover {
+      border-color: #8fa89b;
+      box-shadow: 0 20px 40px -10px rgba(62, 85, 75, 0.16), 0 0 20px rgba(188, 222, 206, 0.35);
+    }
+    .featured-glow-overlay {
+      position: absolute;
+      top: -80px;
+      right: -60px;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(188, 226, 211, 0.5) 0%, rgba(220, 238, 230, 0.15) 50%, rgba(253, 251, 247, 0) 75%);
+      pointer-events: none;
+    }
+    .featured-card-content {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 860px) {
+      .featured-card-content {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .featured-app-card {
+        padding: 24px;
+      }
+      .featured-preview {
+        display: none;
+      }
+    }
   </style>
 </head>
-<body class="mesh-bg min-h-screen font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900 pb-20">
+<body class="mesh-bg min-h-screen font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900 pb-16">
 
+  <!-- Sticky Navigation Header -->
   <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 transition-all">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -78,41 +141,11 @@
       <div class="flex items-center gap-2">
         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>16 Apps Online</span>
+          <span id="headerOnlineCount">15 Apps Online</span>
         </div>
-        <!-- Button HTML -->
-<a 
-  href="https://support-lilac-omega.vercel.app/" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  class="contact-dev-btn"
->
-  Contact The Dev
-</a>
-
-<!-- Embedded CSS Styling -->
-<style>
-  .contact-dev-btn {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #ffffff;
-    background-color: #000000;
-    border: 1px solid #000000;
-    border-radius: 9999px; /* Fully rounded pill shape */
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-
-  /* Reverse color rollover */
-  .contact-dev-btn:hover {
-    background-color: #ffffff;
-    color: #000000;
-  }
-</style>
+        <a href="https://support-lilac-omega.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-dev-btn">
+          Contact The Dev
+        </a>
         <button id="copyShareBtn" onclick="shareShowcase()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
           <span class="hidden sm:inline">Share List</span>
@@ -122,6 +155,7 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
+    <!-- Hero Intro Section -->
     <section class="bg-white/90 border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden mb-10">
       <div class="absolute -right-16 -top-16 w-64 h-64 bg-teal-100/60 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute right-10 -bottom-16 w-56 h-56 bg-amber-100/50 rounded-full blur-2xl pointer-events-none"></div>
@@ -135,7 +169,7 @@
             Crafted with code, coffee & curiosity.
           </h1>
           <p class="mt-3 text-slate-600 text-base sm:text-lg leading-relaxed">
-            Welcome to my curated index of web applications, experiments, tools, and multiplayer creations. Built for practical utility, playful exploration, and community sharing.
+            Welcome to my curated index of web applications, experiments, tools, and multiplayer creations. Built for practical utility, offline speed, and community sharing.
           </p>
 
           <div class="flex flex-wrap items-center gap-2 mt-5">
@@ -143,7 +177,7 @@
             <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">React / Next</span>
             <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">TypeScript</span>
             <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">Tailwind CSS</span>
-            <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">WebRTC / Sockets</span>
+            <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">IndexedDB</span>
             <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">HTML5 Canvas</span>
             <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 text-slate-700 font-mono font-medium">Vercel</span>
           </div>
@@ -151,7 +185,7 @@
 
         <div class="grid grid-cols-2 gap-3 min-w-[240px]">
           <div class="bg-slate-50/80 border border-slate-200/70 p-4 rounded-2xl">
-            <div class="text-2xl font-extrabold text-slate-900 font-mono" id="statTotalApps">12</div>
+            <div class="text-2xl font-extrabold text-slate-900 font-mono" id="statTotalApps">15</div>
             <div class="text-xs font-medium text-slate-500 mt-0.5">Live Web Projects</div>
           </div>
           <div class="bg-slate-50/80 border border-slate-200/70 p-4 rounded-2xl">
@@ -159,7 +193,7 @@
             <div class="text-xs font-medium text-slate-500 mt-0.5">Free & Accessible</div>
           </div>
           <div class="bg-slate-50/80 border border-slate-200/70 p-4 rounded-2xl">
-            <div class="text-2xl font-extrabold text-slate-900 font-mono">4</div>
+            <div class="text-2xl font-extrabold text-slate-900 font-mono" id="statTotalCategories">4</div>
             <div class="text-xs font-medium text-slate-500 mt-0.5">Core Categories</div>
           </div>
           <div class="bg-slate-50/80 border border-slate-200/70 p-4 rounded-2xl">
@@ -170,30 +204,25 @@
       </div>
     </section>
 
-    <!-- ==========================================
-         FEATURED APP BANNER: CharacterPromptGen
-         Palette: Vanilla Ice Cream & Sage / Mint
-         Spans full 3-column width in a standard grid
-         ========================================== -->
+    <!-- Featured App Banner: CharacterPromptGen -->
     <article class="featured-app-card">
-      <!-- Soft Mint / Sage ambient decorative glow -->
       <div class="featured-glow-overlay" aria-hidden="true"></div>
-
       <div class="featured-card-content">
-        <!-- Left / Top Info Column -->
-        <div class="featured-info">
-          <div class="featured-badge-group">
-            <span class="badge badge-launch">
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#e4efe7] text-[#3b5f4c] border border-[#c2dbcb]">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
               This Month's Special Launch
             </span>
-            <span class="badge badge-category">AI & Creative Writing</span>
+            <span class="inline-flex items-center text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#ede7dc] text-[#685e54] border border-[#dfd7ca]">
+              AI & Creative Writing
+            </span>
           </div>
 
-          <div class="featured-brand">
-            <div class="featured-icon">
+          <div class="flex items-center gap-4 mb-3.5">
+            <div class="w-14 h-14 bg-gradient-to-br from-[#7da592] to-[#4e7762] rounded-2xl flex items-center justify-center text-white shadow-md shrink-0">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 <path d="M12 7v6"></path>
@@ -201,255 +230,45 @@
               </svg>
             </div>
             <div>
-              <h2 class="featured-title">CharacterPromptGen</h2>
-              <span class="featured-domain">characterpromptgen.app</span>
+              <h2 class="text-2xl font-extrabold text-[#1e2522] tracking-tight leading-tight">CharacterPromptGen</h2>
+              <span class="text-xs font-mono text-[#6d7b73]">characterpromptgen.app</span>
             </div>
           </div>
 
-          <p class="featured-description">
+          <p class="text-sm text-[#4f5854] leading-relaxed mb-5 max-w-xl">
             Craft deep, multifaceted characters and rich fictional personas in seconds. Designed for authors, screenwriters, RPG game masters, and digital artists looking for evocative creative prompts and tailored backstory generation.
           </p>
 
-          <div class="featured-actions">
-            <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              Launch App
+          <div class="flex items-center gap-4">
+            <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#466e5a] hover:bg-[#395c4a] text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all hover:-translate-y-0.5">
+              <span>Launch App</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
             </a>
-            <span class="featured-tagline">Curated on EspressoHub</span>
+            <span class="text-xs font-medium text-[#857e74]">Curated on EspressoHub</span>
           </div>
         </div>
 
-        <!-- Right / Visual Feature Highlight -->
-        <div class="featured-preview">
-          <div class="preview-bubble">
-            <span class="bubble-tag">Personality Archetype</span>
-            <p>"A rogue archivist haunted by sentient parchment, bound to truth."</p>
+        <div class="featured-preview flex flex-col gap-3">
+          <div class="bg-white border border-[#e1ded7] border-l-4 border-l-[#7da592] rounded-xl p-3.5 shadow-sm">
+            <span class="block text-[11px] font-bold text-[#4a725e] uppercase tracking-wider mb-1">Personality Archetype</span>
+            <p class="text-xs italic text-[#38423d] leading-relaxed">"A rogue archivist haunted by sentient parchment, bound to truth."</p>
           </div>
-          <div class="preview-bubble">
-            <span class="bubble-tag">Visual Descriptor</span>
-            <p>"Eucalyptus-dyed linen, etched brass compass, quiet woodland traveler."</p>
+          <div class="bg-white border border-[#e1ded7] border-l-4 border-l-[#7da592] rounded-xl p-3.5 shadow-sm">
+            <span class="block text-[11px] font-bold text-[#4a725e] uppercase tracking-wider mb-1">Visual Descriptor</span>
+            <p class="text-xs italic text-[#38423d] leading-relaxed">"Eucalyptus-dyed linen, etched brass compass, quiet woodland traveler."</p>
           </div>
         </div>
       </div>
     </article>
 
-    <style>
-      /* Base card: vanilla cream background with soft sage border */
-      .featured-app-card {
-        grid-column: 1 / -1; /* Spans full width of 3-column parent grid */
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ea 60%, #f2eae0 100%);
-        border: 1.5px solid #d2ded5;
-        border-radius: 20px;
-        padding: 32px 36px;
-        color: #2e3532;
-        box-shadow: 0 14px 34px -8px rgba(78, 93, 86, 0.1), 0 1px 3px rgba(0, 0, 0, 0.04);
-        margin-bottom: 24px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      .featured-app-card:hover {
-        border-color: #8fa89b;
-        box-shadow: 0 20px 40px -10px rgba(62, 85, 75, 0.16), 0 0 20px rgba(188, 222, 206, 0.35);
-      }
-
-      /* Soft sage & mint atmospheric glow */
-      .featured-glow-overlay {
-        position: absolute;
-        top: -80px;
-        right: -60px;
-        width: 340px;
-        height: 340px;
-        background: radial-gradient(circle, rgba(188, 226, 211, 0.5) 0%, rgba(220, 238, 230, 0.15) 50%, rgba(253, 251, 247, 0) 75%);
-        pointer-events: none;
-      }
-
-      .featured-card-content {
-        display: grid;
-        grid-template-columns: 1.45fr 1fr;
-        gap: 36px;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Badges */
-      .featured-badge-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 16px;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        padding: 5px 12px;
-        border-radius: 999px;
-      }
-
-      /* Sage highlight badge */
-      .badge-launch {
-        background: #e4efe7;
-        color: #3b5f4c;
-        border: 1px solid #c2dbcb;
-      }
-
-      .badge-category {
-        background: #ede7dc;
-        color: #685e54;
-        border: 1px solid #dfd7ca;
-      }
-
-      /* Identity / App Header */
-      .featured-brand {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 14px;
-      }
-
-      /* Icon tile: Sage into deep mint */
-      .featured-icon {
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #7da592 0%, #4e7762 100%);
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        box-shadow: 0 8px 18px rgba(78, 119, 98, 0.25);
-        flex-shrink: 0;
-      }
-
-      .featured-title {
-        font-size: 1.65rem;
-        font-weight: 800;
-        margin: 0;
-        color: #1e2522;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-      }
-
-      .featured-domain {
-        font-size: 0.85rem;
-        color: #6d7b73;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      }
-
-      .featured-description {
-        font-size: 0.95rem;
-        color: #4f5854;
-        line-height: 1.6;
-        margin: 0 0 22px 0;
-        max-width: 620px;
-      }
-
-      /* Actions */
-      .featured-actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 0.92rem;
-        text-decoration: none;
-        padding: 10px 22px;
-        border-radius: 10px;
-        transition: all 0.2s ease;
-      }
-
-      /* Mint/Sage primary button */
-      .btn-primary {
-        background: #466e5a;
-        color: #ffffff;
-        box-shadow: 0 4px 12px rgba(70, 110, 90, 0.25);
-      }
-
-      .btn-primary:hover {
-        background: #395c4a;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(70, 110, 90, 0.35);
-      }
-
-      .featured-tagline {
-        font-size: 0.84rem;
-        color: #857e74;
-        font-weight: 500;
-      }
-
-      /* Interactive visual highlight cards */
-      .featured-preview {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .preview-bubble {
-        background: #ffffff;
-        border: 1px solid #e1ded7;
-        border-left: 4px solid #7da592; /* mint/sage accent stripe */
-        border-radius: 10px;
-        padding: 13px 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-      }
-
-      .bubble-tag {
-        display: block;
-        font-size: 0.68rem;
-        font-weight: 700;
-        color: #4a725e;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 4px;
-      }
-
-      .preview-bubble p {
-        margin: 0;
-        font-size: 0.86rem;
-        font-style: italic;
-        color: #38423d;
-        line-height: 1.45;
-      }
-
-      /* Responsive breakdown */
-      @media (max-width: 860px) {
-        .featured-card-content {
-          grid-template-columns: 1fr;
-          gap: 22px;
-        }
-
-        .featured-app-card {
-          padding: 24px;
-        }
-
-        .featured-preview {
-          display: none;
-        }
-      }
-    </style>
-
+    <!-- Filter & Search Controls -->
     <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
-      <!-- Category Tabs -->
-      <div class="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0">
         <button class="filter-tab active px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-slate-900 text-white transition-all whitespace-nowrap shadow-sm" data-category="all">
-          All Projects (<span id="count-all">12</span>)
+          All Projects (<span id="count-all">0</span>)
         </button>
         <button class="filter-tab px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900 transition-all whitespace-nowrap" data-category="tools">
           AI & Dev Tools (<span id="count-tools">0</span>)
@@ -465,7 +284,6 @@
         </button>
       </div>
 
-      <!-- Quick Search input -->
       <div class="relative w-full md:w-72">
         <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -474,14 +292,13 @@
           id="searchInput" 
           type="text" 
           placeholder="Filter by name, tag, or domain..." 
-          class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
+          class="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-full text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
         >
       </div>
     </div>
 
-    <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Projects will be injected here via JavaScript -->
-    </div>
+    <!-- Dynamic Project Grid -->
+    <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
     <!-- Empty search state -->
     <div id="emptyState" class="hidden py-16 text-center">
@@ -496,6 +313,7 @@
     </div>
   </main>
 
+  <!-- Side Drawer Modal -->
   <div id="projectDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
     <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onclick="closeDrawer()"></div>
     <div class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto z-10">
@@ -523,21 +341,16 @@
         </div>
 
         <div class="mt-6">
-          <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Key Highlights & Use Cases</h4>
-          <ul id="drawerHighlights" class="mt-2 space-y-2 text-sm text-slate-600">
-            <!-- Highlights inserted dynamically -->
-          </ul>
+          <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Key Highlights</h4>
+          <ul id="drawerHighlights" class="mt-2 space-y-2 text-sm text-slate-600"></ul>
         </div>
 
         <div class="mt-6">
           <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Technologies Used</h4>
-          <div id="drawerTags" class="flex flex-wrap gap-1.5">
-            <!-- Badges inserted dynamically -->
-          </div>
+          <div id="drawerTags" class="flex flex-wrap gap-1.5"></div>
         </div>
       </div>
 
-      <!-- Action buttons -->
       <div class="mt-8 pt-4 border-t border-slate-100 flex flex-col gap-2">
         <a id="drawerLaunchBtn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition">
           <span>Launch Application</span>
@@ -551,14 +364,76 @@
     </div>
   </div>
 
+  <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 pointer-events-none">
     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
     <span id="toastMessage">Link copied to clipboard!</span>
   </div>
 
+  <!-- Clean Minimal Footer -->
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 text-center text-xs text-slate-400 border-t border-slate-200/80 mt-16">
+    <p>Crafted for productivity and exploration &bull; 2026 &bull; <a href="mailto:info.biz.developer@gmail.com" class="hover:text-slate-600 transition-colors">info.biz.developer@gmail.com</a></p>
+  </footer>
+
   <script>
-    // Full project database containing all live URLs
     const projects = [
+      {
+        id: "aurabudget",
+        title: "AuraBudget",
+        rawUrl: "budget-if-you-can.vercel.app",
+        url: "https://budget-if-you-can.vercel.app/",
+        category: "productivity",
+        categoryLabel: "Productivity & Business",
+        icon: "💰",
+        bgLight: "bg-amber-50 text-amber-600 border-amber-100",
+        badgeColor: "bg-amber-50 text-amber-700 border-amber-200",
+        shortDesc: "Fast recurring cashflow and expense hub featuring a 40-day projection timeline.",
+        fullDesc: "A zero-tracking financial planner utilizing client-side IndexedDB persistence. Models bills, recurring wages, and urgent expense deadlines over a 40-day forecasting horizon.",
+        highlights: [
+          "Interactive 40-day projection timeline chart",
+          "Zero tracking with 100% offline-ready IndexedDB storage",
+          "Dynamic expense and income recurring cadence manager"
+        ],
+        tags: ["Finance", "Cashflow", "IndexedDB", "Productivity"]
+      },
+      {
+        id: "designflowplanner",
+        title: "Design Flow Planner",
+        rawUrl: "flow-woad-three.vercel.app",
+        url: "https://flow-woad-three.vercel.app/",
+        category: "productivity",
+        categoryLabel: "Productivity & Business",
+        icon: "📐",
+        bgLight: "bg-sky-50 text-sky-600 border-sky-100",
+        badgeColor: "bg-sky-50 text-sky-700 border-sky-200",
+        shortDesc: "Digital product ideation suite with sprint calendars and competitor gap matrices.",
+        fullDesc: "An all-in-one planning workbench for software designers and indie builders. Houses milestone pipelines, gap analysis matrices, feature boards, and sprint schedules.",
+        highlights: [
+          "Visual milestone pipeline with drag-and-drop stages",
+          "Market competitor gap matrix and differentiation mapping",
+          "Sprint timeline and design asset organizing canvas"
+        ],
+        tags: ["ProductDesign", "Roadmap", "Productivity", "Planning"]
+      },
+      {
+        id: "omniplanpro",
+        title: "OmniPlan Pro",
+        rawUrl: "projectpal.app",
+        url: "https://projectpal.app/",
+        category: "productivity",
+        categoryLabel: "Productivity & Business",
+        icon: "🗂️",
+        bgLight: "bg-emerald-50 text-emerald-600 border-emerald-100",
+        badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        shortDesc: "Offline-first project hierarchy suite with hour rollups, portable ZIPs, and JSON backups.",
+        fullDesc: "A structured project suite managing an 8-project / 5-stage / 6-task workflow hierarchy. Features automatic hour rollups, instant JSON snapshots, and portable client-side exports.",
+        highlights: [
+          "Rigid 8-project, 5-stage, 6-task operational hierarchy",
+          "Automated billable hour rollups across milestone stages",
+          "Portable ZIP and JSON snapshot imports and exports"
+        ],
+        tags: ["ProjectManagement", "OfflineFirst", "IndexedDB", "Productivity"]
+      },
       {
         id: "conceptpromptgen",
         title: "Concept Prompt Gen",
@@ -576,7 +451,7 @@
           "One-click variation toggles and style anchors",
           "Export-ready format for direct chat completion pasting"
         ],
-        tags: ["AI Tools", "Prompt Engineering", "LLM", "Generator", "Productivity"]
+        tags: ["AI Tools", "Prompt Engineering", "LLM", "Generator"]
       },
       {
         id: "cmdgen",
@@ -793,20 +668,10 @@
     let searchQuery = '';
     let currentActiveProject = null;
 
-    // Calculate category counts dynamically
     function updateCategoryCounts() {
-      const counts = {
-        all: projects.length,
-        tools: 0,
-        productivity: 0,
-        entertainment: 0,
-        social: 0
-      };
-
+      const counts = { all: projects.length, tools: 0, productivity: 0, entertainment: 0, social: 0 };
       projects.forEach(p => {
-        if (counts[p.category] !== undefined) {
-          counts[p.category]++;
-        }
+        if (counts[p.category] !== undefined) counts[p.category]++;
       });
 
       document.getElementById('count-all').innerText = counts.all;
@@ -814,6 +679,9 @@
       document.getElementById('count-productivity').innerText = counts.productivity;
       document.getElementById('count-entertainment').innerText = counts.entertainment;
       document.getElementById('count-social').innerText = counts.social;
+
+      document.getElementById('headerOnlineCount').innerText = `${counts.all} Apps Online`;
+      document.getElementById('statTotalApps').innerText = counts.all;
     }
 
     function renderProjects() {
@@ -840,69 +708,60 @@
 
       emptyState.classList.add('hidden');
 
-      grid.innerHTML = filtered.map(p => {
-        return `
-          <div class="group bg-white rounded-2xl border border-slate-200/90 p-5 shadow-subtle hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
-            <div>
-              <!-- Card Header -->
-              <div class="flex items-start justify-between gap-3 mb-3.5">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border ${p.bgLight}">
-                  ${p.icon}
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${p.badgeColor}">
-                    ${p.categoryLabel}
-                  </span>
-                </div>
+      grid.innerHTML = filtered.map(p => `
+        <div class="group bg-white rounded-2xl border border-slate-200/90 p-5 shadow-subtle hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+          <div>
+            <div class="flex items-start justify-between gap-3 mb-3.5">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border ${p.bgLight}">
+                ${p.icon}
               </div>
-
-              <!-- Title & URL -->
-              <div class="mb-2.5">
-                <h3 class="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">
-                  ${p.title}
-                </h3>
-                <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-mono text-xs text-slate-400 hover:text-teal-600 mt-0.5 transition-colors">
-                  <span>${p.rawUrl}</span>
-                  <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                </a>
-              </div>
-
-              <!-- Description -->
-              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                ${p.shortDesc}
-              </p>
-
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-1 mb-5">
-                ${p.tags.slice(0, 3).map(tag => `
-                  <span class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-medium rounded-md transition-colors">
-                    #${tag}
-                  </span>
-                `).join('')}
-                ${p.tags.length > 3 ? `<span class="px-1.5 py-0.5 text-slate-400 text-[10px]">+${p.tags.length - 3}</span>` : ''}
-              </div>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${p.badgeColor}">
+                ${p.categoryLabel}
+              </span>
             </div>
 
-            <!-- Card Action Footer -->
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-              <button onclick="openDrawer('${p.id}')" class="text-xs font-semibold text-slate-500 hover:text-slate-900 py-1.5 px-2 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1">
-                <span>Details</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              </button>
+            <div class="mb-2.5">
+              <h3 class="text-base font-bold text-slate-900 group-hover:text-teal-600 transition-colors">
+                ${p.title}
+              </h3>
+              <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-mono text-xs text-slate-400 hover:text-teal-600 mt-0.5 transition-colors">
+                <span>${p.rawUrl}</span>
+                <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
 
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyLink('${p.url}', '${p.title}')" title="Copy URL" class="p-2 text-slate-400 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
-                </button>
-                <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition shadow-sm">
-                  <span>Open</span>
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-              </div>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              ${p.shortDesc}
+            </p>
+
+            <div class="flex flex-wrap gap-1 mb-5">
+              ${p.tags.slice(0, 3).map(tag => `
+                <span class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-medium rounded-md transition-colors">
+                  #${tag}
+                </span>
+              `).join('')}
+              ${p.tags.length > 3 ? `<span class="px-1.5 py-0.5 text-slate-400 text-[10px]">+${p.tags.length - 3}</span>` : ''}
             </div>
           </div>
-        `;
-      }).join('');
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button onclick="openDrawer('${p.id}')" class="text-xs font-semibold text-slate-500 hover:text-slate-900 py-1.5 px-2 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1">
+              <span>Details</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <div class="flex items-center gap-1.5">
+              <button onclick="copyLink('${p.url}', '${p.title}')" title="Copy URL" class="p-2 text-slate-400 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              </button>
+              <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition shadow-sm">
+                <span>Open</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
     }
 
     document.querySelectorAll('.filter-tab').forEach(button => {
@@ -916,9 +775,6 @@
       });
     });
 
-   
-
-    // Search input listener
     document.getElementById('searchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderProjects();
@@ -944,18 +800,14 @@
       document.getElementById('drawerDesc').innerText = proj.fullDesc;
       document.getElementById('drawerLaunchBtn').href = proj.url;
 
-      // Highlights
-      const hlContainer = document.getElementById('drawerHighlights');
-      hlContainer.innerHTML = proj.highlights.map(hl => `
+      document.getElementById('drawerHighlights').innerHTML = proj.highlights.map(hl => `
         <li class="flex items-start gap-2">
           <svg class="w-4 h-4 text-teal-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
           <span>${hl}</span>
         </li>
       `).join('');
 
-      // Tags
-      const tagContainer = document.getElementById('drawerTags');
-      tagContainer.innerHTML = proj.tags.map(t => `
+      document.getElementById('drawerTags').innerHTML = proj.tags.map(t => `
         <span class="px-2.5 py-1 text-xs font-mono font-medium rounded-md bg-slate-100 text-slate-700">
           #${t}
         </span>
@@ -992,8 +844,7 @@
     }
 
     function shareShowcase() {
-      const currentUrl = window.location.href;
-      copyLink(currentUrl, "Directory Link");
+      copyLink(window.location.href, "Directory Link");
     }
 
     let toastTimer;
@@ -1012,156 +863,14 @@
       }, 2500);
     }
 
-    // Keyboard escape closes modal drawer
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeDrawer();
-      }
+      if (e.key === 'Escape') closeDrawer();
     });
 
-    // Initialize application on page load
     window.addEventListener('DOMContentLoaded', () => {
       updateCategoryCounts();
       renderProjects();
     });
   </script>
-  <!-- Generic App Footer / Banner -->
-<footer style="
-    width: 100%;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 0.85rem;
-    color: #9ca3af;
-    background-color: transparent;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-">
-
-<!-- Newly Added Section Heading -->
-<div class="flex items-center gap-4 my-8">
-  <div class="flex items-center gap-3">
-    <span class="flex h-3 w-3 relative">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-    </span>
-    <h2 class="text-2xl font-bold tracking-tight text-black flex items-center gap-2">
-      Newly Added
-      <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-950/60 border border-amber-800/50 px-2 py-0.5 rounded-full">
-        Fresh
-      </span>
-    </h2>
-  </div>
-  <div class="flex-1 h-px bg-gradient-to-r from-neutral-800 via-neutral-800 to-transparent"></div>
-</div>
-
-  
-   <!-- Row: Additional Productivity & Business Tools -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-
-  <!-- Card 1: AuraBudget -->
-  <article class="project-card flex flex-col justify-between bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-xl p-6 transition-all duration-200 shadow-sm hover:shadow-md" data-category="Productivity & Business">
-    <div>
-      <div class="flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-950/40 border border-amber-800/40 w-fit px-2.5 py-1 rounded-full mb-3">
-        <span>💰</span>
-        <span>Productivity &amp; Business</span>
-      </div>
-      <h3 class="text-xl font-semibold text-white tracking-tight">AuraBudget</h3>
-      <a href="https://budget-if-you-can.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
-        budget-if-you-can.vercel.app
-      </a>
-      <p class="mt-3 text-sm text-neutral-300 leading-relaxed">
-        Fast recurring cashflow and expense hub featuring a 40-day projection timeline, urgency prioritisation, and zero-tracking local IndexedDB storage.
-      </p>
-    </div>
-
-    <div class="mt-6 pt-4 border-t border-neutral-800/80">
-      <div class="flex flex-wrap gap-1.5 mb-4 text-xs">
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#Finance</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#Cashflow</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#IndexedDB</span>
-        <span class="px-1.5 py-0.5 rounded bg-neutral-800/50 text-neutral-400">+1</span>
-      </div>
-      <div class="flex items-center gap-3">
-       
-        <a href="https://budget-if-you-can.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 px-3.5 py-2 text-xs font-medium text-neutral-900 bg-amber-400 hover:bg-amber-300 font-semibold rounded-lg transition-colors text-center inline-flex items-center justify-center gap-1">
-          Open <span>&nearr;</span>
-        </a>
-      </div>
-    </div>
-  </article>
-
-  <!-- Card 2: Design Flow Planner -->
-  <article class="project-card flex flex-col justify-between bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-xl p-6 transition-all duration-200 shadow-sm hover:shadow-md" data-category="Productivity & Business">
-    <div>
-      <div class="flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-950/40 border border-amber-800/40 w-fit px-2.5 py-1 rounded-full mb-3">
-        <span>📐</span>
-        <span>Productivity &amp; Business</span>
-      </div>
-      <h3 class="text-xl font-semibold text-white tracking-tight">Design Flow Planner</h3>
-      <a href="https://flow-woad-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
-        flow-woad-three.vercel.app
-      </a>
-      <p class="mt-3 text-sm text-neutral-300 leading-relaxed">
-        Digital product ideation and production suite with milestone pipelines, competitor gap matrices, sprint calendars, and UI asset boards.
-      </p>
-    </div>
-
-    <div class="mt-6 pt-4 border-t border-neutral-800/80">
-      <div class="flex flex-wrap gap-1.5 mb-4 text-xs">
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#Productivity</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#Roadmap</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#ProductDesign</span>
-        <span class="px-1.5 py-0.5 rounded bg-neutral-800/50 text-neutral-400">+1</span>
-      </div>
-      <div class="flex items-center gap-3">
-        
-        <a href="https://flow-woad-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 px-3.5 py-2 text-xs font-medium text-neutral-900 bg-amber-400 hover:bg-amber-300 font-semibold rounded-lg transition-colors text-center inline-flex items-center justify-center gap-1">
-          Open <span>&nearr;</span>
-        </a>
-      </div>
-    </div>
-  </article>
-
-  <!-- Card 3: OmniPlan Pro (ProjectPal) -->
-  <article class="project-card flex flex-col justify-between bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-xl p-6 transition-all duration-200 shadow-sm hover:shadow-md" data-category="Productivity & Business">
-    <div>
-      <div class="flex items-center gap-2 text-xs font-medium text-amber-400 bg-amber-950/40 border border-amber-800/40 w-fit px-2.5 py-1 rounded-full mb-3">
-        <span>🗂️</span>
-        <span>Productivity &amp; Business</span>
-      </div>
-      <h3 class="text-xl font-semibold text-white tracking-tight">OmniPlan Pro</h3>
-      <a href="https://projectpal.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
-        projectpal.app
-      </a>
-      <p class="mt-3 text-sm text-neutral-300 leading-relaxed">
-        Offline-first project suite managing an 8-project / 5-stage / 6-task workflow hierarchy with hour rollups, portable ZIP downloads, and JSON snapshots.
-      </p>
-    </div>
-
-    <div class="mt-6 pt-4 border-t border-neutral-800/80">
-      <div class="flex flex-wrap gap-1.5 mb-4 text-xs">
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#ProjectManagement</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#OfflineFirst</span>
-        <span class="px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">#IndexedDB</span>
-        <span class="px-1.5 py-0.5 rounded bg-neutral-800/50 text-neutral-400">+1</span>
-      </div>
-      <div class="flex items-center gap-3">
-        
-        <a href="https://projectpal.app/" target="_blank" rel="noopener noreferrer" class="flex-1 px-3.5 py-2 text-xs font-medium text-neutral-900 bg-amber-400 hover:bg-amber-300 font-semibold rounded-lg transition-colors text-center inline-flex items-center justify-center gap-1">
-          Open <span>&nearr;</span>
-        </a>
-      </div>
-    </div>
-  </article>
-
-</div>
-  
-  <span>
-
-    Made for productivity and enjoyment &nbsp;|&nbsp; 
-    2026 &nbsp;|&nbsp; 
-        info.biz.developer@gmail.com
-</span>
-</footer>
 </body>
 </html>
