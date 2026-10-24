@@ -999,5 +999,196 @@
   </script>
   <!-- Affiliate Slide-Out Tab -->
 
+  <style>
+    :root {
+      --drawer-width: 290px;
+      --bg-color: #ffffff;
+      --border-color: #e2e8f0;
+      --primary: #2563eb;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Container fixed to the left edge */
+    .affiliate-drawer-wrap {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Collapsed state moves drawer body off-screen */
+    .affiliate-drawer-wrap.collapsed {
+      transform: translateY(-50%) translateX(calc(-1 * var(--drawer-width)));
+    }
+
+    /* Drawer body */
+    .affiliate-drawer {
+      width: var(--drawer-width);
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      padding: 20px 18px;
+      box-sizing: border-box;
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .drawer-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Top mini dismiss button inside drawer */
+    .dismiss-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    .dismiss-btn:hover {
+      color: var(--text-main);
+      background-color: #f1f5f9;
+    }
+
+    /* Link item cards */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .affiliate-link-card {
+      display: block;
+      padding: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .affiliate-link-card:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+      transform: translateY(-1px);
+    }
+
+    .affiliate-link-card strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .affiliate-link-card span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Tab button attached to the right edge of the drawer */
+    .drawer-tab {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 7px;
+      cursor: pointer;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.05);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .drawer-tab:hover {
+      background: #f8fafc;
+      color: var(--text-main);
+    }
+
+    .drawer-tab svg {
+      transition: transform 0.3s ease;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Flip arrow when collapsed */
+    .collapsed .drawer-tab svg {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide-Out Drawer Widget -->
+  <aside class="affiliate-drawer-wrap" id="affiliateDrawer" aria-label="Featured Tools">
+    <div class="affiliate-drawer">
+      <div class="drawer-header">
+        <p class="drawer-title">Recommended Tools</p>
+        <button class="dismiss-btn" id="dismissBtn" aria-label="Dismiss drawer" title="Dismiss">&times;</button>
+      </div>
+
+      <div class="link-list">
+        <a href="https://webtemplategen.app" target="_blank" rel="noopener sponsored" class="affiliate-link-card">
+          <strong>WebTemplateGen</strong>
+          <span>Instant modern web layouts & boilerplate generator.</span>
+        </a>
+
+        <a href="https://masterpromptengine.app" target="_blank" rel="noopener sponsored" class="affiliate-link-card">
+          <strong>MasterPromptEngine</strong>
+          <span>Craft, test, and optimize high-converting AI prompts.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Outer toggle tab -->
+    <button class="drawer-tab" id="drawerTab" aria-label="Toggle drawer" title="Slide drawer">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+  </aside>
+
+  <script>
+    const drawerWrap = document.getElementById('affiliateDrawer');
+    const drawerTab = document.getElementById('drawerTab');
+    const dismissBtn = document.getElementById('dismissBtn');
+
+    function toggleDrawer() {
+      drawerWrap.classList.toggle('collapsed');
+    }
+
+    drawerTab.addEventListener('click', toggleDrawer);
+    dismissBtn.addEventListener('click', toggleDrawer);
+  </script>
+
+
+
 </body>
 </html>
